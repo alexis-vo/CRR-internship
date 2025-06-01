@@ -1,0 +1,195 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Monthly Calendar
+% LaTeX Template
+% Version 2.0 (January 5, 2025)
+%
+% This template originates from:
+% https://www.LaTeXTemplates.com
+%
+% Author:
+% Vel (vel@latextemplates.com)
+%
+% License:
+% CC BY-NC-SA 4.0 (https://creativecommons.org/licenses/by-nc-sa/4.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	CLASS, PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[
+	a4paper, % Paper size, use either a4paper or letterpaper
+	10pt, % Default font size, specify between 8pt and 12pt
+]{CSCalendars}
+
+%----------------------------------------------------------------------------------------
+%	CALENDAR SETTINGS
+%----------------------------------------------------------------------------------------
+
+% \setcounter{startingdayoftheweek}{1} % The starting day of the calendar: 1 means Sunday, 2 for Monday, 3 for Tuesday, etc. Should be between 1 and 7.
+
+% \setcounter{startingdate}{2} % The starting date of the calendar, will usually be 1 but can be set to 30 or 31 to display those dates at the top left of the calendar when the first day of the month is near the end of the week
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+%----------------------------------------------------------------------------------------
+%	CALENDAR PAGE(S)
+%----------------------------------------------------------------------------------------
+
+% Each calendar consists of 7 * 5 = 35 table cells. Each cell must be populated with either a \blankday or \day command. \blankday is used for empty cells that don't contain dates, usually at the start or end of the calendar. \day is used for all days with dates and takes 2 parameters: 1) the header at the top of the day cell (e.g. Work, Social, etc). 2) The day's events, separated by \eventskip for nice vertical spacing. You can also use \dayheader{<title>} inside each \day's events to output an additional header.
+
+%----------------------------------------------------------------------------------------
+
+\setcounter{startingdayoftheweek}{1}
+\setcounter{startingdate}{1}
+% Calendar header
+\begin{center}
+	\textsc{\LARGE Mai}\\ % Month
+	\textsc{\large 2025} % Year
+\end{center}
+
+% Calendar table
+\begin{calendar}
+	\blankday{}
+	\blankday{}
+	\blankday{}
+	\day{Fête du travail}{Révisions examens} % 1
+	\day{Révisions examens}{} % 2
+	\day{Révisions examens}{} % 3
+	\day{Révisions examens}{} % 4
+	\day{Examens}{}	% 5
+	\day{Examens}{}	% 6
+	\day{Examens}{}	% 7
+	\day{Armistice}{Révisions examens}	% 8
+	\day{Révisions examens}{}	% 9
+	\day{Révisions examens}{}	% 10
+	\day{Révisions examens}{}	% 11
+	\day{Examens}{}	% 12
+	\day{Examens}{}	% 13
+	\day{Examens}{}	% 14
+	\day{Examens}{}	% 15
+	\day{Préparation stage}{}	% 16
+	\day{Préparation stage}{}	% 17
+	\day{Préparation stage}{}	% 18
+	\day{Préparation stage}{Création de mindmap en finance pour comprendre les généralités}	% 19
+	\day{Préparation stage}{Finteach website, méthode Feynman}	% 20
+	\day{Préparation stage}{}	% 21
+	\day{Préparation stage}{Lecture active du chapitre 9, cours de Renaud BOURLÈS}	% 22
+	\day{Préparation stage}{Lecture active du chapitre 9, cours de Renaud BOURLÈS}	% 23
+	\day{Préparation stage}{Diverses lectures actives sur le modèle CRR}	% 24
+	\day{Préparation stage}{Diverses lectures actives sur le modèle CRR}	% 25
+	\day{Préparation stage}{Diverses lectures actives sur le modèle CRR}	% 26
+	\day{Journée Francilienne de Programmation}{Sorbonne Université}	% 27
+	\day{Préparation stage}{Diverses lectures actives sur le modèle CRR}	% 28
+	\day{Ascension}{Diverses lectures actives sur le modèle CRR} % 29
+	\day{Préparation stage}{Diverses lectures actives sur le modèle CRR}	% 30
+	\day{Préparation stage}{Diverses lectures actives sur le modèle CRR}	% 31
+	\blankday{}
+\end{calendar}
+
+%----------------------------------------------------------------------------------------
+
+\setcounter{startingdayoftheweek}{1}
+\setcounter{startingdate}{2}
+
+% Calendar header
+\begin{center}
+	\textsc{\LARGE Juin}\\ % Month
+	\textsc{\large 2025} % Year
+\end{center}
+
+% Calendar table
+\begin{calendar}
+	\day{Début du stage}{09h30 Réunion} % 2
+	\day{Goal}{Description} % 3
+	\day{Goal}{Description} % 4
+	\day{Goal}{Description} % 5
+	\day{Goal}{Description} % 6
+	\day{Goal}{Description} % 7
+	\day{Goal}{Description} % 8
+	\day{Goal}{Description} % 9
+	\day{Goal}{Description} % 10
+	\day{Goal}{Description} % 11
+	\day{Goal}{Description} % 12
+	\day{Goal}{Description} % 13
+	\day{Goal}{Description} % 14
+	\day{Goal}{Description} % 15
+	\day{Goal}{Description} % 16
+	\day{Goal}{Description} % 17
+	\day{Goal}{Description} % 18
+	\day{Goal}{Description} % 19
+	\day{Goal}{Description} % 20
+	\day{Goal}{Description} % 21
+	\day{Goal}{Description} % 22
+	\day{Goal}{Description} % 23
+	\day{Goal}{Description} % 24
+	\day{Goal}{Description} % 25
+	\day{Goal}{Description} % 26
+	\day{Goal}{Description} % 27
+	\day{Goal}{Description} % 28
+	\day{Goal}{Description} % 29
+	\day{Fin du stage}{} % 30
+	\blankday{}
+	\blankday{}
+	\blankday{}
+	\blankday{}
+	\blankday{}
+	\blankday{}
+\end{calendar}
+
+%----------------------------------------------------------------------------------------
+
+\setcounter{startingdayoftheweek}{1}
+\setcounter{startingdate}{1}
+
+% Calendar header
+\begin{center}
+	\textsc{\LARGE Juillet}\\ % Month
+	\textsc{\large 2025} % Year
+\end{center}
+
+% Calendar table
+\begin{calendar}
+	\blankday{}
+	\day{Goal}{Description} % 1
+	\day{Goal}{Description}	% 2
+	\day{Goal}{Description}	% 3
+	\day{Goal}{Description}	% 4
+	\day{Goal}{Description}	% 5
+	\day{Goal}{Description}	% 6
+	\day{Goal}{Description}	% 7
+	\day{Goal}{Description}	% 8
+	\day{Goal}{Description}	% 9
+	\day{Goal}{Description}	% 10
+	\day{Goal}{Description}	% 11
+	\day{Goal}{Description}	% 12
+	\day{Goal}{Description}	% 13
+	\day{Goal}{Description}	% 14
+	\day{Goal}{Description}	% 15	
+	\day{Goal}{Description}	% 16
+	\day{Goal}{Description}	% 17
+	\day{Goal}{Description}	% 18
+	\day{Goal}{Description}	% 19
+	\day{Goal}{Description}	% 20
+	\day{Goal}{Description}	% 21
+	\day{Goal}{Description}	% 22
+	\day{Goal}{Description}	% 23
+	\day{Goal}{Description}	% 24
+	\day{Goal}{Description}	% 25
+	\day{Goal}{Description}	% 26
+	\day{Goal}{Description}	% 27
+	\day{Goal}{Description}	% 28
+	\day{Goal}{Description}	% 29
+	\day{Goal}{Description}	% 30
+	\day{Goal}{Description}	% 31
+	\blankday{}
+	\blankday{}
+	\blankday{}
+\end{calendar}
+
+%----------------------------------------------------------------------------------------
+
+\end{document}
