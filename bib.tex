@@ -1,19 +1,52 @@
-\documentclass[11pt]{article}
+\documentclass[a4paper,10pt]{article}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
-\usepackage{hyperref}
+\usepackage[colorlinks=true, linkcolor=black]{hyperref}
+\usepackage{bookmark}
+\usepackage[french]{babel}
+\usepackage{geometry}
+\usepackage{titlesec}
+\titleformat{name=\section,numberless}[runin]{\normalsize\bfseries}{}{0pt}{}
 
-\title{Modèle de Cox-Ross-Rubinstein\\\medskip Bibliographie annotée}
-\author{Alexis VO\\Université Paris-Saclay}
+\usepackage{titling}
+\renewcommand\maketitlehooka{\null\mbox{}\vfill}
+\renewcommand\maketitlehookd{\vfill\null}
 
+\usepackage{tocloft}
+\renewcommand{\contentsname}{}
+\setlength{\cftbeforetoctitleskip}{0pt}
+\setlength{\cftaftertoctitleskip}{0pt}
+
+\title{\Huge{\textbf{Modèle de Cox-Ross-Rubinstein}}\\ \medskip
+      \Huge{\textit{Bibliographie annotée}}\vspace*{0.7cm}}
+\author{\LARGE{Alexis VO}\vspace{1cm}\\ \medskip
+      Université Paris-Saclay\\École polytechnique}
+\date{\vspace{0.2cm}\today}
+
+% === BEGIN DOCUMENT ===
 \begin{document}
-\maketitle
 
-Cette bibliographie annotée présente les références que j'ai utilisé dans le cadre de mon stage au CMAP de l'Ecole polytechnique. Chaque référence est suivie d'une brève annotation qui résume son contenu et sa pertinence pour le sujet traité.
+\vspace{\fill}
+  \maketitle
+\vspace{\fill}
+
+\newpage
+
+Cette bibliographie annotée présente les références que j'ai utilisé dans le cadre de mon stage au CMAP de l'Ecole polytechnique. Chaque référence est suivie d'une brève annotation qui résume son contenu et sa pertinence pour le sujet traité.\\ \medskip
+
+\begin{center}
+    \tableofcontents    
+\end{center}
+
+\newpage
 
 \vspace{1em}
 
-\textbf{Renaud Bourles} \textit{Chapitre 9 - Le modèle de Cox-Ross-Rubinstein}. Mathematics for finance (2008-2010). 1st year Master Finance. Probabilités discrètes et modèles en temps discret.
+\section*{Renaud Bourles\quad}
+\phantomsection
+\addcontentsline{toc}{section}{Renaud Bourles}
+
+\textit{Chapitre 9 - Le modèle de Cox-Ross-Rubinstein}. Mathematics for finance (2008-2010). 1st year Master Finance. Probabilités discrètes et modèles en temps discret.
 Disponible en ligne : \href{http://renaud.bourles.perso.centrale-med.fr/MathsFi/Chap%209%20-%20Le%20modele%20Cox-Ross-Rubinstein.pdf}{lien vers le chapitre}.
 \begin{itemize}
     \item Evaluation des options dans un cadre discret puis continu.
@@ -26,11 +59,20 @@ Bonne lecture introductive qui plonge instantanément dans le sujet.\\
 
 \vspace{1em}
 
-\textbf{Isabelle Bajeux} \textit{Gestion de portefeuille dans un modèle binomial}. Annale d'économie et de statistique, n°13, Jan-Mar 1989, p.49-76 (28 pages).
+\section*{Isabelle Bajeux}
+\phantomsection
+\addcontentsline{toc}{section}{Isabelle Bajeux}
+\textit{Gestion de portefeuille dans un modèle binomial}. Annale d'économie et de statistique, n°13, Jan-Mar 1989, p.49-76 (28 pages).
 Disponible en ligne (pour les membres de l'Univ. Paris-Saclay) : \href{https://www.jstor.org/stable/20075729}{lien vers l'article}.
 \begin{itemize}
     \item Lecture en cours
 \end{itemize}
+
+\vspace{1em}
+\section*{Investopedia}
+\phantomsection
+\addcontentsline{toc}{section}{Investopedia}
+\textit{Dictionnaire des termes financiers} \href{https://www.investopedia.com/financial-term-dictionary-4769738}{Consulter}.
 
 
 \end{document}
