@@ -4,24 +4,33 @@
 \usepackage[french]{babel}
 \usepackage{geometry}
 \usepackage{graphicx}
-\usepackage{hyperref}
+
+
+
 \usepackage{enumitem}
 \usepackage{amsmath, amssymb}
 \usepackage{titlesec}
 \usepackage{xcolor}
 \usepackage{listings}
 
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=red
+}
+
 \usepackage{titling}
 \renewcommand\maketitlehooka{\null\mbox{}\vfill}
 \renewcommand\maketitlehookd{\vfill\null}
 
-\geometry{margin=2.5cm}
-\hypersetup{colorlinks=true, linkcolor=blue, urlcolor=blue}
-
-\title{\Huge Journal de bord\\[1ex]
-\Large Modèle de Cox-Ross-Rubinstein\\[1ex]}
-\author{Alexis VO\\Université Paris-Saclay\\ École polytechnique}
-\date{\today}
+\title{\Huge{\textbf{Modèle de Cox-Ross-Rubinstein}}\\ \medskip
+      \Huge{\textit{Journal de bord}}\vspace*{0.7cm}}
+\author{\LARGE{Alexis VO}\vspace{1cm}\\ \medskip
+      Université Paris-Saclay\\École polytechnique}
+\date{\vspace{0.2cm}\today}
 
 \begin{document}
 
@@ -118,17 +127,38 @@ L’application est en place. L’architecture modulaire permettra une extension
 % JOUR 2
 %==========================================================
 
-\section{Jour 2, ...}
+\section{Jour 2, CRR et Black-Scholes}
+La journée a été consacrée à la lecture des premiers chapitres du polycopié \textit{Martingales pour la finance} et à la mise en place du TP1.1 - \textit{Le modèle de CRR}.
 
 \subsection{Objectifs de la journée}
 \begin{itemize}
-    \item Lecture du polycopié \textit{Martingales pour la finance} et TP1.1 - \textit{Le modèle de CRR}.
-    \item ...
-    \item ...
+    \item Lecture du polycopié \textit{Martingales pour la finance}.
+    \item Faire le TP1.1 - \textit{Le modèle de CRR}.
+    \item Continuer le développement de l’application interactive.
 \end{itemize}
-\subsection{...}
+\subsection{Travail réalisé}
+\begin{itemize}
+    \item Compréhension des concepts mathématiques tels que \( u_n, d_n, h_n, q \), etc.
+    \item Implémentation en Python des fonctions :
+    \begin{itemize}
+        \item \texttt{Sn} pour les prix possibles de l’actif à une date donnée.
+        \item \texttt{Payoff} pour le profil de gain d’un call européen à maturité.
+        \item \texttt{Calln} pour le prix d’une option via l’évaluation backward.
+        \item \texttt{Deltan} pour le vecteur de couverture delta à chaque étape.
+    \end{itemize}
+    \item Étude de la convergence : tracé de l’écart relatif entre CRR et Black-Scholes pour différents \( n \).
+    \item Rédaction d’un résumé en {\LaTeX} avec explications mathématiques, intuition des formules, et comparaison entre les deux modèles.
+\end{itemize}
+
 \subsection{À suivre...}
+\begin{itemize}
+    \item Étendre l’étude à d’autres types d’options (put européen, option asiatique...).
+    \item Intégrer une étude numérique de sensibilité aux paramètres \( \sigma, r, T \) (analyses dites \og greeks \fg).
+    \item Ajouter des cas pratiques et graphiques interactifs pour illustrer le comportement de la couverture dynamique.
+\end{itemize}
+
 \subsection{Conclusion}
+Durant cette deuxième journée, j'ai pu implémenter l’intégralité du modèle binomial de Cox-Ross-Rubinstein. J'ai également pu vérifier sa cohérence avec la formule continue de Black-Scholes. La compréhension de la couverture dynamique - \textit{delta hedging} - a été approfondie, et les outils numériques sont désormais en place pour explorer des cas plus complexes. Le lien entre les modèles discrets et continus a été mis en évidence à travers l’étude de la convergence.
 
 \newpage
 
