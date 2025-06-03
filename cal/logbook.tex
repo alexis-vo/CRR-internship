@@ -1,0 +1,150 @@
+\documentclass[a4paper,11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[french]{babel}
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{amsmath, amssymb}
+\usepackage{titlesec}
+\usepackage{xcolor}
+\usepackage{listings}
+
+\usepackage{titling}
+\renewcommand\maketitlehooka{\null\mbox{}\vfill}
+\renewcommand\maketitlehookd{\vfill\null}
+
+\geometry{margin=2.5cm}
+\hypersetup{colorlinks=true, linkcolor=blue, urlcolor=blue}
+
+\title{\Huge Journal de bord\\[1ex]
+\Large Modèle de Cox-Ross-Rubinstein\\[1ex]}
+\author{Alexis VO\\Université Paris-Saclay\\ École polytechnique}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\newpage
+\tableofcontents
+\newpage
+
+%==========================================================
+% JOUR 1
+%==========================================================
+
+\section{Jour 1, développement d’un outil de gestion de portefeuille avec options}
+\noindent La matinée a été consacrée à :
+\begin{itemize}
+    \item la compréhension du modèle de Cox-Ross-Rubinstein (CRR).
+    \item la mise en place d'une structure de projet.
+\end{itemize}
+L'après-midi midi a été consacrée à :
+\begin{itemize}
+    \item la création d'une application interactive avec Streamlit.
+    \item l'implémentation de la valorisation des options européennes et américaines.
+\end{itemize}
+La préparation du stage a permis de poser les bases nécessaires pour débuter efficacement.
+
+\subsection{Objectifs de la journée}
+Créer une application interactive pour :
+\begin{itemize}
+    \item Valoriser des options européennes et américaines
+    \item Simuler la réplication dynamique
+    \item Intégrer une interface utilisateur avec Streamlit
+\end{itemize}
+
+\subsection{Architecture du projet}
+Paradigme de développement : \textbf{Programmation Orientée Obet}.
+\begin{verbatim}
+portfolio-pricing-system/
+|-- app.py
+|-- main.py
+|-- core/
+|   |-- options.py
+|   |-- option_factory.py
+|-- models/
+|   |-- binomial_model.py
+|   |-- black_scholes.py
+|-- portfolio/
+|   |-- hedging.py
+|   |-- portfolio.py
+|   |-- replication.py
+|-- tests/
+|   |-- test_binomial_model.py
+|-- utils/
+|   |-- visualization.py
+\end{verbatim}
+
+\subsection{Exemples Modules implémentés}
+
+\subsubsection{options.py}
+Contient les classes pour les différentes options :
+\begin{itemize}
+    \item \texttt{Option}, classe de base
+    \item \texttt{EuropeanCallOption}, \texttt{EuropeanPutOption}
+    \item \texttt{AmericanCallOption}, \texttt{AmericanPutOption}
+\end{itemize}
+
+Chaque classe hérite d'\texttt{Option} et implémente \texttt{payoff()} ainsi que le flag \texttt{is\_american}.
+
+\subsubsection{option\_factory.py}
+Implémente un \texttt{OptionFactory} qui permet d’instancier dynamiquement des options à partir d’un nom chaîne de caractères, comme \texttt{european\_call}.
+
+\subsubsection{binomial\_model.py}
+Contient la fonction \texttt{binomial\_option\_pricing} :
+\begin{itemize}
+    \item Construction de l’arbre des prix
+    \item Backward induction pour valoriser l’option
+    \item Prise en compte de l’exercice anticipé pour les options américaines
+\end{itemize}
+
+\subsection{À suivre...}
+\begin{itemize}
+    \item Intégration de la visualisation du portefeuille (\texttt{matplotlib} ou \texttt{plotly})
+    \item Affichage de l’arbre binomial ou de la stratégie de couverture
+    \item Élargissement à un portefeuille multi-options
+    \item Ajout d’un module d’export PDF ou Excel
+    \item etc...
+\end{itemize}
+
+\subsection{Conclusion}
+L’application est en place. L’architecture modulaire permettra une extension facile vers d'autres modèles de valorisation et vers une gestion de portefeuille plus complète.
+
+\newpage
+
+%==========================================================
+% JOUR 2
+%==========================================================
+
+\section{Jour 2, ...}
+
+\subsection{Objectifs de la journée}
+\begin{itemize}
+    \item Lecture du polycopié \textit{Martingales pour la finance} et TP1.1 - \textit{Le modèle de CRR}.
+    \item ...
+    \item ...
+\end{itemize}
+\subsection{...}
+\subsection{À suivre...}
+\subsection{Conclusion}
+
+\newpage
+
+%==========================================================
+% JOUR N
+%==========================================================
+
+\section{Jour N, ...}
+\subsection{Objectifs de la journée}
+\begin{itemize}
+    \item ...
+    \item ...
+    \item ...
+\end{itemize}
+\subsection{...}
+\subsection{À suivre...}
+\subsection{Conclusion}
+\newpage
+\end{document}
