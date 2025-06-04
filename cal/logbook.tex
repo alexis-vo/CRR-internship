@@ -163,6 +163,61 @@ Durant cette deuxième journée, j'ai pu implémenter l’intégralité du modè
 \newpage
 
 %==========================================================
+% JOUR 3
+%==========================================================
+
+\section{Jour 3, rédaction d'un cours sur le modèle CRR}
+\subsection{Objectifs de la journée}
+\begin{itemize}
+    \item Développer une stratégie de couverture dynamique.
+    \item Poursiuvre l'intégration de la visualisation des résultats.
+    \item Rédaction d'un cours sur le modèle de Cox-Ross-Rubinstein.
+\end{itemize}
+\subsection{Contenu abordé}
+
+\subsubsection{Arbres binomiaux}
+\begin{itemize}
+    \item Arbre à un pas : valeurs numériques illustrant un actif pouvant monter ou baisser, avec calcul du prix d’un call.
+    \item Arbre symbolique généré avec TikZ : noeuds représentant $S_0$, $S_u$, $S_d$, puis généralisation à $t = n$.
+    \item Arbre centré sur les valeurs de l’option : $V_0$, $V_u$, $V_d$, flèches annotées par $q$ et $1-q$.
+\end{itemize}
+
+\subsubsection{Théorème d’évaluation neutre au risque}
+\begin{itemize}
+    \item Explication de la formule $V_0 = \frac{1}{1+r}(q V_u + (1 - q)V_d)$.
+    \item Définition et intuition derrière la probabilité neutre au risque : $q = \frac{1 + r - d}{u - d}$.
+    \item Illustration graphique via TikZ centrée sur la valeur de l’option.
+\end{itemize}
+
+\subsubsection{Portefeuille répliquant}
+Début d'intuition graphique recherchée : représenter comment une combinaison d'actif sans risque (bond) et d’actif risqué permet de reproduire le payoff d’une option.
+
+\subsubsection{Taux sans risque}
+Clarification : le taux $r$ représente le rendement d’un actif sans risque, typiquement un \textit{bond}.
+
+\subsubsection{Rédaction d’un commentaire d’interprétation d’un prix de call}
+
+\subsubsection{Position courte}
+\begin{itemize}
+    \item Définition simple : vendre un actif qu’on ne détient pas, en espérant le racheter plus bas.
+    \item Risques, fonctionnement, et illustration avec un exemple clair.
+\end{itemize}
+
+\subsection{À suivre...}
+\begin{itemize}
+    \item Construire un portefeuille répliquant dans un modèle binomial à un pas.
+    \item Étendre les arbres binomiaux à plusieurs périodes ($n$ étapes).
+    \item Implémenter les calculs de prix d’options selon le modèle CRR dans l'application interactives déjà prêtes (Streamlit).
+    \item Étudier les notions de delta hedging et le lien avec la réplication.
+    \item Approfondir le lien entre absence d’arbitrage et probabilités neutres au risque.
+\end{itemize}
+
+\subsection{Conclusion}
+Cette troisième journée a permis de consolider les pour comprendre le modèle de CRR et les instruments dérivés simples comme le call européen (que j'ai donc mieux compris). Les exemples chiffrés et arbres binomiaux ont facilité l’appropriation de ces concepts. Les prochaines étapes visent à étendre ce cadre à plusieurs périodes et à mettre en œuvre les outils numériques nécessaires à une simulation complète (avec Streamlit par exemple).
+
+\newpage
+
+%==========================================================
 % JOUR N
 %==========================================================
 
@@ -170,11 +225,11 @@ Durant cette deuxième journée, j'ai pu implémenter l’intégralité du modè
 \subsection{Objectifs de la journée}
 \begin{itemize}
     \item ...
-    \item ...
-    \item ...
 \end{itemize}
 \subsection{...}
 \subsection{À suivre...}
 \subsection{Conclusion}
 \newpage
+
+%==========================================================
 \end{document}

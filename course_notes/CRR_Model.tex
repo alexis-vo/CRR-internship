@@ -1,0 +1,424 @@
+\documentclass[12pt,a4paper]{article}
+
+%--------------------------------------------------
+% Packages de base
+%--------------------------------------------------
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[french]{babel}
+\usepackage{amsmath, amssymb, amsfonts}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{enumitem}
+\usepackage{geometry}
+\geometry{margin=2.5cm}
+\usepackage{appendix}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta, positioning}
+\usepackage[gen]{eurosym}
+\newcommand{\quotes}[1]{``#1''}
+
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+
+\usepackage{titling}
+\renewcommand\maketitlehooka{\null\mbox{}\vfill}
+\renewcommand\maketitlehookd{\vfill\null}
+
+\title{\Huge{\textbf{Modèle de Cox-Ross-Rubinstein}}\\ \medskip
+      \Huge{\textit{Notes}}\vspace*{0.7cm}}
+\author{\LARGE{Alexis VO}\vspace{1cm}\\ \medskip
+      Université Paris-Saclay\\École polytechnique}
+\date{\vspace{0.2cm}\today}
+
+%--------------------------------------------------
+% Début du document
+%--------------------------------------------------
+\begin{document}
+\renewcommand\labelitemi{\textbullet}
+
+\maketitle
+
+\newpage
+
+\section*{Introduction}
+Ces notes de cours sont rédigées durant mon stage en finance quantitative au CMAP de l'École polytechnique. Le sujet principal est le modèle binomial de Cox-Ross-Rubinstein. Je ne prétends pas rédiger un polycopié complet ; il s'agit plutôt de présenter des concepts clés que le lecteur pourra enrichir. Il est recommandé au lecteur novice d'également se référer au glossaire. J'y développe les fondements, en expliquant de manière progressive les notions rencontrées.  Ce document est destiné à toute personne désirant comprendre les fondements du modèle CRR et ses sujets connexes. Ma formation académique, une double-licence en mathématiques et informatique à l'université Paris-Saclay, me permet d'aborder ces éléments sans prérequis en finance. On remarquera aussi un fort attrait pour la modélisation informatique. Il va donc de soi que certaines notions fondamentales en mathématiques seront indispensables à la bonne compréhension de ce document.\\Bonne lecture.
+
+\newpage
+
+\tableofcontents
+
+\newpage
+
+%--------------------------------------------------
+\section{Contexte et motivation}
+En finance, il y a une multitude d'instruments permettant aux investisseurs de gérer les risques et de tirer parti des opportunités de marché. Parmi ces instruments, certains se distinguent par leur capacité à s'adapter aux fluctuations des actifs sous-jacents. Ils ne nécessitent pas la possession directe de ces actifs. Ces instruments sont les \textit{produits dérivés}. Ils jouent un rôle essentiel dans les stratégies de couverture et de spéculation.
+
+\subsection{Qu'est-ce qu'un \textit{produit dérivé} ?}
+Un produit dérivé est un instrument financier dont la valeur dépend d'un actif dit \textit{sous-jacent} (comme une action, une matière première, etc.). Par exemple,
+
+\begin{itemize}
+  \item Option d'achat (call)
+  \item Option de vente (put)
+\end{itemize}
+
+\subsection{Pourquoi modéliser les prix ?}
+Les marchés financiers sont incertains. Modéliser les prix permet :
+\begin{itemize}
+  \item d'anticiper les valeurs futures,
+  \item de déterminer un \textit{juste prix} pour les produits dérivés,
+  \item d'éviter les opportunités d'arbitrage.
+\end{itemize}
+
+\subsection{Présentation du modèle binomial}
+Le modèle de Cox-Ross-Rubinstein (CRR), introduit en 1979 par ces auteurs, s'applique dans un cadre discret pour modéliser les mouvements d'un actif risqué. Ce modèle utilise une structure binomiale pour décrire l'évolution des prix d'un actif au fil du temps, ce qui signifie qu'à chaque étape, le prix de l'actif peut soit augmenter, soit diminuer selon un processus stochastique. On retrouve bien cet aspect binomial, binaire, du gain ou de la perte.
+
+\begin{center}
+    \begin{tikzpicture}[>=stealth, node distance=2.2cm and 3.2cm]
+
+    \node (S0) at (0,0) {$S_0$};
+
+    \node (Su1) at (3,2) {$S_0 \cdot u$};
+    \node (Sd1) at (3,-2) {$S_0 \cdot d$};
+
+    \node (Sun) at (7,3) {$S_0 \cdot u^n$};
+    \node (Midn) at (7,0)   {$\cdots$};
+    \node (Sdn) at (7,-3) {$S_0 \cdot d^n$};
+
+    \draw[->] (S0) -- (Su1);
+    \draw[->] (S0) -- (Sd1);
+
+    \draw[dashed, ->] (Su1) -- (Sun);
+    \draw[dashed, ->] (Su1) -- (Midn);
+    \draw[dashed, ->] (Sd1) -- (Midn);
+    \draw[dashed, ->] (Sd1) -- (Sdn);
+
+    \node at (0,-3.5) {Temps $t = 0$};
+    \node at (3,-3.5) {Temps $t = 1$};
+    \node at (7,-3.5) {Temps $t = n$};
+
+    \end{tikzpicture}
+\end{center}
+
+En décomposant ainsi le mouvement des prix en une série d'étapes discrètes, le modèle CRR permet de formaliser l'incertitude des marchés financiers de manière simplifiée mais efficace. Cette approche binomiale permet la compréhension plus aisée du calcul des prix d'options et d'autres produits dérivés. Nous verrons dans un second temps comment ce modèle peut être généralisé.
+
+%--------------------------------------------------
+\section{Le modèle CRR à une période}
+
+Le modèle CRR à une période -- ou bien un pas deux états -- introduit de manière simplifiée les concepts de modélisation financière en temps discret. Dans ce cadre, le modèle suppose qu'un actif financier peut évoluer selon deux états possibles sur une seule période : une \textit{hausse} ou une \textit{baisse} de prix. Le modèle à un pas deux états illustre les principes fondamentaux de l'\textit{arbitrage} et de l'\textit{évaluation neutre au risque}.
+
+Nous verrons dans cette partie un simple exemple pour apprivoiser le modèle, puis nous le généraliserons dans la section suivante.
+
+\subsection{Un exemple simple pour appréhender le modèle}
+
+Considérons un actif dont le \textit{spot} est \( S_0 = 100 \) euros. Supposons que dans un an, le prix de cet actif puisse soit augmenter de 20\% (\( u = 1.2 \)), soit diminuer de 10\% (\( d = 0.9 \)). Le taux d'intérêt sans risque est \( r = 0.05 \).
+
+\begin{itemize}
+    \item Prix initial : \( S_0 = 100 \) euros.
+    \item Prix en cas de hausse : \( S_0 \cdot u = 120 \) euros.
+    \item Prix en cas de baisse : \( S_0 \cdot d = 90 \) euros.
+\end{itemize}
+
+Supposons que nous ayons une option d'achat européenne -- un call européen -- avec un \textit{strike} de 110 euros. Les valeurs de l'option à la fin de l'année sont :
+
+\begin{itemize}
+    \item \( V_u = \max(120 - 110, 0) = 10 \) euros, si le prix monte.
+    \item \( V_d = \max(90 - 110, 0) = 0 \) euros, si le prix baisse.
+\end{itemize}
+
+\vspace{0.5cm}
+
+\begin{center}
+    \begin{tikzpicture}[>=stealth, node distance=2.5cm and 3.5cm]
+    % Noeuds de prix de l'actif
+    \node (S0)         at (0,0)       {$S_0 = 100\euro{}$};
+    \node (Su)         at (3,2)       {$S_u = 120\euro{}$};
+    \node (Sd)         at (3,-2)      {$S_d = 90\euro{}$};
+
+    % Noeuds de valeur de l'option
+    \node (Vu)         at (6,2)       {$V_u = 10\euro{}$};
+    \node (Vd)         at (6,-2)      {$V_d = 0\euro{}$};
+
+    % Arêtes
+    \draw[->] (S0) -- (Su) node[midway, above left] {u};
+    \draw[->] (S0) -- (Sd) node[midway, below left] {d};
+    \draw[->] (Su) -- (Vu);
+    \draw[->] (Sd) -- (Vd);
+
+    % Niveaux de temps
+    \node at (0,-3) {$t=0$};
+    \node at (3,-3) {$t=1$};
+    \node at (6,-3) {maturity};
+
+    \end{tikzpicture}
+\end{center}
+
+\subsection{Théorème fondamental de l'évaluation des actifs}
+
+Dans le cadre général du modèle binomial à un pas, nous cherchons à évaluer un produit dérivé en utilisant une probabilité neutre au risque. On supposera l'absence d'opportunité d'arbitrage.
+
+\begin{itemize}
+    \item \( S_0 \) : Prix initial de l'actif.
+    \item \( u \) et \( d \) : Facteurs de hausse et de baisse.
+    \item \( r \) : Taux d'intérêt sans risque.
+\end{itemize}
+
+Le théorème d'évaluation neutre au risque donne que la valeur initiale \( V_0 \) du produit dérivé est :
+
+\begin{equation}
+    \boxed{V_0 = \frac{1}{1 + r} \left( q \cdot V_u + (1 - q) \cdot V_d \right)}
+\end{equation}
+
+où \( q \) est la probabilité neutre au risque définie par :
+
+\begin{equation}
+    \boxed{q = \frac{(1 + r) - d}{u - d}}
+\end{equation}
+
+\vspace{1cm}
+
+\begin{center}
+    \begin{tikzpicture}[>=stealth, node distance=2cm and 3.5cm, thick]
+        \node (V0) at (0,0) {$V_0$};
+        \node (Vu) at (4,2) {$V_u$};
+        \node (Vd) at (4,-2) {$V_d$};
+
+        \draw[->, dashed] (Vu) -- (V0) node[midway, above left] {$q$};
+        \draw[->, dashed] (Vd) -- (V0) node[midway, below left] {$1 - q$};
+
+        \node at (0,-3) {$t=0$};
+        \node at (4,-3) {$t=1$};
+    \end{tikzpicture}\\
+    \textbf{Évaluation au temps $t = 0$ à partir de $t = 1$}
+\end{center}
+
+\vspace{1cm}
+
+\subsection{Démonstration}
+
+Pour démontrer ce théorème, nous allons construire un portefeuille répliquant qui reproduit les gains du produit dérivé. Ce portefeuille sera composé de deux éléments : une position dans l'actif risqué et une position dans un actif sans risque.
+
+\subsubsection{Construction du portefeuille répliquant}
+
+Considérons un portefeuille composé de \(\Delta\) unités de l'actif risqué et d'un montant \(B\) investi dans un actif sans risque. La valeur initiale du portefeuille est donnée par :
+
+\begin{equation}
+V_0 = \Delta \cdot S_0 + B
+\end{equation}
+
+À la fin de la période, la valeur du portefeuille évolue en fonction de la variation du prix de l'actif risqué :
+
+\begin{itemize}
+    \item Si le prix de l'actif monte, la valeur du portefeuille devient \(\Delta \cdot S_0 \cdot u + B \cdot (1 + r)\).
+    \item Si le prix de l'actif baisse, la valeur du portefeuille devient \(\Delta \cdot S_0 \cdot d + B \cdot (1 + r)\).
+\end{itemize}
+
+\subsubsection{Réplication du produit dérivé}
+
+Pour que ce portefeuille réplique parfaitement le produit dérivé, il doit avoir la même valeur que le produit dérivé dans les deux états futurs possibles :
+
+\begin{equation}
+\Delta \cdot S_0 \cdot u + B \cdot (1 + r) = V_u
+\end{equation}
+
+\begin{equation}
+\Delta \cdot S_0 \cdot d + B \cdot (1 + r) = V_d
+\end{equation}
+
+Nous avons deux équations avec deux inconnues (\(\Delta\) et \(B\)). Résolvons ce système pour \(\Delta\) et \(B\). En soustrayant la deuxième équation de la première, nous obtenons :
+
+\[\Delta \cdot S_0 \cdot (u - d) = V_u - V_d\]
+
+\begin{equation}
+\Delta = \frac{V_u - V_d}{S_0 \cdot (u - d)}
+\end{equation}
+
+En substituant \(\Delta\) dans l'une des équations, nous pouvons résoudre pour \(B\) :
+
+\begin{equation}
+B = \frac{u \cdot V_d - d \cdot V_u}{(1 + r) \cdot (u - d)}
+\end{equation}
+
+\subsubsection{Calcul de la valeur initiale du produit dérivé}
+
+La valeur initiale du portefeuille répliquant doit être égale à la valeur initiale du produit dérivé :
+
+\begin{equation}
+V_0 = \Delta \cdot S_0 + B = \frac{V_u - V_d}{u - d} + \frac{u \cdot V_d - d \cdot V_u}{(1 + r) \cdot (u - d)}
+\end{equation}
+
+En combinant les termes, nous obtenons :
+
+\[V_0 = \frac{(1 + r) \cdot (V_u - V_d) + u \cdot V_d - d \cdot V_u}{(1 + r) \cdot (u - d)}\]
+
+Simplifions le numérateur :
+
+\[(1 + r) \cdot V_u - (1 + r) \cdot V_d + u \cdot V_d - d \cdot V_u = (1 + r - d) \cdot V_u + (u - (1 + r)) \cdot V_d\]
+
+Cela nous permet de réécrire \(V_0\) comme :
+
+\begin{equation}
+    V_0 = \frac{(1 + r - d) \cdot V_u + (u - (1 + r)) \cdot V_d}{(1 + r) \cdot (u - d)}
+\end{equation}
+
+\subsubsection{Probabilité Neutre au Risque}
+
+Nous définissons la probabilité neutre au risque \(q\) comme :
+
+\begin{equation}
+q = \frac{(1 + r) - d}{u - d}
+\end{equation}
+
+Alors, \(1 - q\) est donné par :
+
+\begin{equation}
+1 - q = \frac{u - (1 + r)}{u - d}
+\end{equation}
+
+\subsubsection{Évaluation neutre au risque}
+
+En substituant \(q\) et \(1 - q\) dans l'équation de \(V_0\), nous obtenons :
+
+\begin{equation}
+\boxed{V_0 = \frac{1}{1 + r} \left( q \cdot V_u + (1 - q) \cdot V_d \right)}
+\end{equation}
+
+Cette équation montre que la valeur initiale du produit dérivé est l'espérance actualisée de sa valeur future sous la probabilité neutre au risque.
+\begin{flushright}
+\begin{tikzpicture}
+\draw[fill=white] (0,0) rectangle (0.25cm,0.25cm);
+\end{tikzpicture}
+\end{flushright}
+%--------------------------------------------------
+
+\subsection{Interprétation}
+
+Analysons la formule :
+
+\begin{itemize}
+    \item \textbf{Actualisation} : le facteur \(\frac{1}{1 + r}\) actualise les paiements futurs à leur valeur présente. Par exemple, un euro reçu dans le futur pourrait valoir moins qu'un euro reçu aujourd'hui.
+    \item \textbf{Probabilité neutre au risque} : La probabilité \( q \) est calculée de manière à ce que l'espérance du rendement de l'actif sous-jacent soit égale au taux sans risque. Cela élimine le risque de marché et permet une évaluation cohérente des produits dérivés.
+    \item \textbf{Espérance des paiements} : Le terme \( q \cdot \text{V}_u + (1 - q) \cdot \text{V}_d \) représente l'espérance des paiements futurs du produit dérivé sous la probabilité neutre au risque.
+
+\end{itemize}
+\textbf{Remarque :} le prix actualisé est une martingale sous la probabilité neutre au risque. Cela signifie que le prix du produit dérivé ne présente pas de tendance à la hausse ou à la baisse dans le temps, ce qui est une condition essentielle pour éviter les opportunités d'arbitrage.
+
+\vspace{0.5cm}
+
+Nous étendrons par la suite ce modèle à un pas à un modèle multi-périodes et à d'autres types de modèles financiers. Mais avant, appliquons ce que nous venons de voir à un exemple concret.
+
+\subsection{Exemple récapitulatif}
+Pour illustrer le modèle CRR à une période, reprenons l'exemple d'introduction du \textit{call} européen.
+
+\subsubsection{Données Initiales}
+\begin{itemize}
+    \item Spot : \( S_0 = 100 \) euros.
+    \item Strike : \( K = 105 \) euros.
+    \item Facteur de hausse : \( u = 1.2 \).
+    \item Facteur de baisse : \( d = 0.9 \).
+    \item Taux d'intérêt sans risque : \( r = 5\% \) ou \( 0.05 \).
+\end{itemize}
+
+\subsubsection{Détermination du \textit{payoff}}
+À l'échéance, le prix de l'actif peut prendre deux valeurs :
+\begin{itemize}
+    \item Si le prix monte : \( S_u = S_0 \cdot u = 100 \cdot 1.2 = \textbf{120} \) euros.
+    \item Si le prix baisse : \( S_d = S_0 \cdot d = 100 \cdot 0.9 = \textbf{90} \) euros.
+\end{itemize}
+
+Le payoff du call à l'échéance est :
+\begin{itemize}
+    \item Payoff en cas de hausse : \( V_u = \max(S_u - K, 0) = \max(120 - 105, 0) = \textbf{15} \) euros.
+    \item Payoff en cas de baisse : \( V_d = \max(S_d - K, 0) = \max(90 - 105, 0) = \textbf{0} \) euros.
+\end{itemize}
+
+\subsubsection{Évaluation neutre au risque}
+On calcule la probabilité neutre au risque \( q \) :
+\[ q = \frac{(1 + r) - d}{u - d} = \frac{(1 + 0.05) - 0.9}{1.2 - 0.9} = \frac{0.15}{0.3} = \textbf{0.5} \]
+
+\subsubsection{Calcul du prix de l'option}
+Le prix du call est calculé en utilisant la formule d'évaluation neutre au risque :
+\[ V_0 = \frac{1}{1.05} \left( 0.5 \cdot 15 + (1 - 0.5) \cdot 0 \right) \]
+\[ V_0 = \frac{1}{1.05} \left( 7.5 \right) \]
+\[ \boxed{V_0 \approx 7.14 \text{ euros}} \]
+
+\subsubsection{Conclusion et interprétations}
+
+Dans cet exemple, le prix du call européen est d’environ \( 7{,}14 \) euros. Voici quelques stratégies et interprétations qui permettent de mieux saisir le rôle et l’intérêt d’une option d’achat.
+
+\begin{itemize}
+
+    \item \textbf{Stratégie de spéculation}
+
+    \begin{itemize}
+        \item \textbf{Parier sur une hausse} : acheter ce call revient à parier que le prix de l’actif dépassera 105 euros. Si par exemple, l’actif monte à 120 euros, le call vaudra 15 euros à l’échéance. On gagne donc \( 15 - 7{,}14 = 7{,}86 \) euros.
+        
+        \item \textbf{Effet de levier} : l’option permet d’investir peu (7,14 €) pour viser un gain plus grand. Cela s’appelle un \textbf{effet de levier} : un petit investissement peut rapporter beaucoup, ou être perdu entièrement.
+    \end{itemize}
+
+    \item \textbf{Stratégie de couverture}
+
+    \begin{itemize}
+        \item \textbf{Se protéger contre une hausse} : si on est vendeur de l’actif -- position courte i.e. on vend un actif que l’on ne possède pas, dans l’espoir de le racheter plus tard à un prix plus bas pour faire un profit -- une option call peut servir de protection. En cas de hausse, les pertes sur la position courte sont compensées par les gains sur l’option.
+        
+        \item \textbf{Vue comme une assurance} : acheter un call peut s’interpréter comme une assurance contre une hausse du prix. La prime (7,14 €) est le “coût” de cette assurance.
+    \end{itemize}
+
+    \item \textbf{Pas d’arbitrage possible}. Le prix de l’option est calculé en supposant qu’il n’existe pas de stratégie d’arbitrage, c’est-à-dire pas de moyen de gagner de l’argent sans risque. Ce principe est fondamental.
+
+    \item \textbf{Lien entre risque et rendement}
+
+    \begin{itemize}
+        \item Le prix de l’option reflète le risque pris par l’acheteur : si le scénario favorable ne se réalise pas, il perd sa mise.
+        
+        \item En contrepartie, il existe un rendement potentiel important si le prix monte beaucoup. L’investisseur doit donc estimer si le jeu en vaut la chandelle.
+    \end{itemize}
+
+    \item \textbf{Pertes limitées, gains possibles importants}
+
+    \begin{itemize}
+        \item \textbf{Pertes limitées} : on ne peut jamais perdre plus que la prime payée, ici 7,14 euros.
+        
+        \item \textbf{Gains potentiellement \quotes{illimités}} : en théorie, si le prix monte beaucoup, le gain peut être très élevé.
+    \end{itemize}
+\end{itemize}
+
+\textbf{Conclusion}. Le prix de 7,14 euros correspond donc à une sorte d’équilibre : il reflète la probabilité de gain, le niveau de risque, et le fait qu’on ne peut pas arbitrer. Cet exemple nous a permis de comprendre pourquoi les options sont utilisées : soit pour prendre une position réfléchie, soit pour se couvrir contre un risque, avec un contrôle clair des pertes possibles.
+
+%--------------------------------------------------
+\section{Extension à plusieurs périodes}
+\subsection{Arbre binomial}
+TODO
+
+%--------------------------------------------------
+\section{Intuitions et réflexes (à modifier)}
+\begin{itemize}
+  \item Plus la volatilité est grande, plus une option vaut cher.
+  \item Une option européenne vaut au moins sa valeur intrinsèque.
+  \item L’arbitrage est un signe que le modèle est incohérent.
+\end{itemize}
+
+%--------------------------------------------------
+\appendix
+%--------------------------------------------------
+
+\section{Préliminaires mathématiques}
+TODO
+
+%--------------------------------------------------
+\section{Exercices simples}
+\begin{enumerate}
+  \item Construire un arbre sur 2 périodes avec $S_0 = 100$, $u = 1.1$, $d = 0.9$, $r = 0.05$, $K = 105$.
+  \item Comparer réplication et méthode des probabilités neutres.
+  \item Étudier l’effet de $r$ sur le prix d’un call.
+\end{enumerate}
+
+TODO 
+
+\end{document}
