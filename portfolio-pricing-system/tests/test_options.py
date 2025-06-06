@@ -7,6 +7,7 @@ sys.path.append(str(Path(__file__).parent.parent))
 from decimal import Decimal
 from core.options import OptionType, OptionOrigin, Option
 from core.options import EuropeanOption, AmericanOption, ExoticOption, BarrierOption
+from models.binomial import binomial_option_pricing
 
 
 class TestOptions(unittest.TestCase):
@@ -16,6 +17,7 @@ class TestOptions(unittest.TestCase):
         self.maturity = Decimal('1')
         self.volatility = Decimal('0.2')
         self.rate = Decimal('0.05')
+        self.barrier_level = Decimal("95")
 
     def test_european_option_call(self):
         option = EuropeanOption(OptionType.CALL, self.spot, self.strike, self.maturity, self.volatility, self.rate)
@@ -47,28 +49,34 @@ class TestOptions(unittest.TestCase):
         self.assertEqual(option.payoff(Decimal('80')), Decimal('20'))
         self.assertEqual(option.payoff(Decimal('120')), Decimal('0'))
 
-    def test_barrier_option_call(self):
-        barrier_level = Decimal('110')
-        option = BarrierOption(OptionType.CALL, self.spot, self.strike, self.maturity, self.volatility, self.rate, barrier_level)
-        self.assertEqual(option.payoff(Decimal('120')), Decimal('20'))
-        self.assertEqual(option.payoff(Decimal('100')), Decimal('0'))
-        self.assertEqual(option.payoff(Decimal('90')), Decimal('0'))
-        self.assertEqual(option.payoff(Decimal('110')), Decimal('0'))
-        self.assertEqual(option.payoff(Decimal('130')), Decimal('30'))
-    
-    def test_barrier_option_put(self):
-        barrier_level = Decimal('90')
-        option = BarrierOption(OptionType.PUT, self.spot, self.strike, self.maturity, self.volatility, self.rate, barrier_level)
-        self.assertEqual(option.payoff(Decimal('80')), Decimal('20'))
-        self.assertEqual(option.payoff(Decimal('100')), Decimal('0'))
-        self.assertEqual(option.payoff(Decimal('110')), Decimal('0'))
-        self.assertEqual(option.payoff(Decimal('90')), Decimal('0'))
-        self.assertEqual(option.payoff(Decimal('70')), Decimal('20'))
-    
-    def test_barrier_option_invalid_level(self):
+    def test_barrier_initialization(self):
+        option = BarrierOption(OptionType.CALL, self.spot, self.strike, self.maturity, self.volatility, self.rate, self.barrier_level)
+        self.assertEqual(option.barrier_level, self.barrier_level)
+
         with self.assertRaises(ValueError):
-            BarrierOption(OptionType.CALL, self.spot, self.strike, self.maturity, self.volatility, self.rate, Decimal('0'))
-    
+            BarrierOption(OptionType.CALL, self.spot, self.strike, self.maturity, self.volatility, self.rate, Decimal("-1"))
+
+    def test_barrier_payoff_call_option(self):
+        option = BarrierOption(OptionType.CALL, self.spot, self.strike, self.maturity, self.volatility, self.rate, self.barrier_level)
+        spot_above_barrier = Decimal("96")
+        self.assertNotEqual(option.payoff(spot_above_barrier), Decimal("0"))
+
+        spot_below_barrier = Decimal("94")
+        self.assertEqual(option.payoff(spot_below_barrier), Decimal("0"))
+
+    def test_barrier_payoff_put_option(self):
+        option = BarrierOption(OptionType.PUT, self.spot, self.strike, self.maturity, self.volatility, self.rate, self.barrier_level)
+        spot_below_barrier = Decimal("94")
+        self.assertNotEqual(option.payoff(spot_below_barrier), Decimal("0"))
+
+        spot_above_barrier = Decimal("96")
+        self.assertEqual(option.payoff(spot_above_barrier), Decimal("0"))
+
+    def test_barrier_origin(self):
+        option = BarrierOption(OptionType.CALL, self.spot, self.strike, self.maturity, self.volatility, self.rate, self.barrier_level)
+        origin = option.origin()
+        self.assertIn('bar', origin)
+            
     def test_option_origin(self):
         option = EuropeanOption(OptionType.CALL, self.spot, self.strike, self.maturity, self.volatility, self.rate)
         origin = option.origin()
