@@ -356,19 +356,11 @@ Dans cet exemple, le prix du call européen est d’environ \( 7{,}14 \) euros. 
     \begin{itemize}
         \item Le prix de l’option reflète le risque pris par l’acheteur : si le scénario favorable ne se réalise pas, il perd sa mise.
         
-        \item En contrepartie, il existe un rendement potentiel important si le prix monte beaucoup. L’investisseur doit donc estimer si le jeu en vaut la chandelle.
-    \end{itemize}
-
-    \item \textbf{Pertes limitées, gains possibles importants}
-
-    \begin{itemize}
-        \item \textbf{Pertes limitées} : on ne peut jamais perdre plus que la prime payée, ici 7,14 euros.
-        
-        \item \textbf{Gains potentiellement \quotes{illimités}} : en théorie, si le prix monte beaucoup, le gain peut être très élevé.
+        \item En contrepartie, il existe un rendement potentiel important si le prix monte beaucoup. L’investisseur doit donc estimer si "le jeu en vaut la chandelle".
     \end{itemize}
 \end{itemize}
 
-\textbf{Conclusion}. Cet exemple nous a permis de comprendre pourquoi les options sont utilisées : soit pour prendre une position réfléchie, soit pour se couvrir contre un risque, avec un contrôle clair des pertes possibles.
+\textbf{Conclusion}. Cet exemple nous a permis de comprendre pourquoi les options sont utilisées : soit pour prendre une position réfléchie, soit pour se couvrir contre un risque, avec un contrôle clair des pertes possibles. \textbf{Mot-clé :} assurance.
 
 %--------------------------------------------------
 %--------------------------------------------------
@@ -408,7 +400,7 @@ L'évaluation se fait par \textbf{backward induction}, en remontant de la maturi
 \end{itemize}
 
 \subsection{Pseudo-code d'implémentation}
-Pour implémenter l'évaluation d'une option européenne dans le modèle CRR à $n$ périodes, on peut utiliser un tableau pour stocker les valeurs de l'actif et de l'option à chaque étape. Voici une proposition de pseudo-code. Je ne prétends pas avoir le meilleur algorithme.
+Pour implémenter l'évaluation d'une option européenne dans le modèle CRR à $n$ périodes, on peut utiliser un tableau pour stocker les valeurs de l'actif et de l'option à chaque étape. Voici une proposition de pseudo-code.
 \begingroup\small
 \begin{verbatim}
 @Input :
@@ -486,6 +478,8 @@ Par ailleurs, la précision de l’évaluation dépend fortement du choix des pa
     \item Facteur de baisse : $d = 0.8$
     \item Taux sans risque par période : $r = 0.05$
 \end{itemize}
+
+Dans cet exemple, on cherche à déterminer la valeur de l'option (européenne) à \(t = 0\).
 
 \noindent \textbf{Étape 1 : Probabilité neutre au risque}. La probabilité neutre au risque $q$ est donnée par :
 \[
