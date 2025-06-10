@@ -85,8 +85,8 @@ def example_of_visualization():
     plot_hedging_deltas(deltas)
 
 def main():
-    # example_of_portfolio_with_crr_model()
-    example_of_visualization()
+    example_of_portfolio_with_crr_model()
+    # example_of_visualization()
 
 if __name__ == "__main__":
     main()

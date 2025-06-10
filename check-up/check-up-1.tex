@@ -1,0 +1,183 @@
+\documentclass[11pt]{beamer}
+\usetheme{Madrid}
+\usefonttheme{serif}
+
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+
+\usepackage{amsmath, amsfonts, amssymb}
+\usepackage{graphicx}
+\usepackage{mathrsfs}
+\usepackage{hyperref}
+\usepackage{bookmark}
+
+\usepackage{tikz}
+
+\setbeamertemplate{caption}[numbered]
+\setbeamertemplate{navigation symbols}{}
+
+\title{Modèle de Cox-Ross-Rubinstein}
+\author[Alexis VO]{Alexis VO}
+
+\institute[]{CMAP - École polytechnique}
+\date{11 juin 2025}
+
+\begin{document}
+
+\begin{frame}
+\titlepage
+\end{frame}
+
+\begin{frame}{Plan}
+\tableofcontents
+\end{frame}
+
+\section{Contexte}
+
+\begin{frame}{Objectifs du stage}
+\begin{itemize}
+    \item Comprendre le modèle de Cox-Ross-Rubinstein pour la valorisation d'options.
+    \item Implémenter un modèle de gestion de portefeuille en Python.
+    \item Étudier la couverture dynamique (delta hedging).
+    \item Vers le modèle de Black-Scholes ?
+    \item ...
+\end{itemize}
+\end{frame}
+
+\section{Modèle CRR}
+
+\begin{frame}{Hypothèses}
+\begin{itemize}
+    \item Marché frictionless\footnote{sans coûts à l'achat/vente/détention}, sans arbitrage.
+    \item Le prix suit un processus binomial :
+    \[
+        S_{t+\Delta t} = 
+        \begin{cases}
+            uS_t & \text{avec probabilité } p \\
+            dS_t & \text{avec probabilité } 1 - p
+        \end{cases}
+    \]
+    \item Probabilité neutre au risque : 
+    \[
+    q = \frac{(1 + r) - d}{u - d}
+    \]
+    \item L'espérance du rendement de l'actif sous-jacent est égale au taux sans risque :
+    \[ E\left[\frac{S_{t+1}-S_t}{S_t}\right] = r \]
+\end{itemize}
+
+
+\end{frame}
+
+\begin{frame}{Modèle CRR}
+\begin{center}
+    \begin{tikzpicture}[>=stealth, node distance=2.2cm and 3.2cm]
+
+    \node (S0) at (0,0) {$S_0$};
+
+    \node (Su1) at (3,2) {$S_0 \cdot u$};
+    \node (Sd1) at (3,-2) {$S_0 \cdot d$};
+
+    \node (Sun) at (7,3) {$S_0 \cdot u^n$};
+    \node (Midn) at (7,0)   {$\cdots$};
+    \node (Sdn) at (7,-3) {$S_0 \cdot d^n$};
+
+    \draw[->] (S0) -- (Su1);
+    \draw[->] (S0) -- (Sd1);
+
+    \draw[dashed, ->] (Su1) -- (Sun);
+    \draw[dashed, ->] (Su1) -- (Midn);
+    \draw[dashed, ->] (Sd1) -- (Midn);
+    \draw[dashed, ->] (Sd1) -- (Sdn);
+
+    \node at (0,-3.5) {Temps $t = 0$};
+    \node at (3,-3.5) {Temps $t = 1$};
+    \node at (7,-3.5) {Temps $t = n$};
+
+    \end{tikzpicture}
+\end{center}
+\end{frame}
+
+\begin{frame}{Modèle CRR}
+La valeur initiale \(V_0\) d'un produit dérivé est donné par le 
+\begin{block}{Théorème d'évaluation des actifs}
+    \[V_0 = \frac{1}{1 + r} \left( q \cdot V_u + (1 - q) \cdot V_d \right)\]
+\end{block}
+où \( q \) est la probabilité neutre au risque, \( V_u \) (resp. \(V_d\)) la valeur haussière (resp. à la baissière).
+
+\end{frame}
+
+
+\begin{frame}{Valorisation d'une option}
+TODO
+\begin{block}{Formule par backward induction}
+\[
+C_0 = e^{-r\Delta t} \left( p C_u + (1 - p) C_d \right)
+\]
+\end{block}
+
+\begin{itemize}
+    \item Application à une option européenne en bout d’arbre.
+    \item Cas d’une option américaine : vérification de l’exercice anticipé à chaque noeud.
+\end{itemize}
+\end{frame}
+
+\section{Travail réalisé}
+
+\begin{frame}{Implémentation Python}
+\begin{itemize}
+    \item TODO
+    \item Construction automatique de l’arbre binomial.
+    \item Calcul des prix des options européennes (call/put).
+    \item Visualisation interactive (matplotlib, plotly).
+    \item Comparaison CRR vs Black-Scholes.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Exemple de résultats}
+\begin{itemize}
+    \item TODO
+    \item Graphe : arbre de prix
+    \item Courbe : valeur de l'option selon la maturité
+    \item Tableau : comparaison CRR / Black-Scholes
+\end{itemize}
+
+% Uncomment the following lines if you add the image at images/arbre_exemple.png
+% \begin{center}
+%     \includegraphics[width=0.6\textwidth]{images/arbre_exemple.png}
+% \end{center}
+\end{frame}
+
+\section{Perspectives}
+
+\begin{frame}{Améliorations et extensions}
+\begin{itemize}
+    \item Intégration des dividendes
+    \item Couverture dynamique (delta hedging)
+    \item Extension à un portefeuille multi-actifs
+    \item Interface utilisateur (Streamlit)
+\end{itemize}
+\end{frame}
+
+\section{Questions}
+
+\begin{frame}{Questions}
+\begin{center}
+    \begin{itemize}
+        \item Convergences et limites : existe-t-il des bornes d’erreur précises sur l’approximation du prix d’option via CRR en fonction du nombre de pas ?
+        \item Choix de u et d : y a-t-il des variantes du modèle CRR qui modifient ces facteurs pour mieux refléter des comportements du marché réel ?
+        \item Applications :  dans quelles situations le modèle CRR reste-t-il encore très pertinent pour la pratique financière ?
+        \item Demander d'autres ressources telles que TD/TP
+        \item Ressources, articles, ouvrages recommandés pour approfondir ?
+    \end{itemize}
+\end{center}
+
+\vspace{0.5cm}
+
+% \begin{figure}[htb]
+%     \centering
+%     \includegraphics[width=0.3\textwidth]{images/logo_cmap.png}
+% \end{figure}
+\end{frame}
+
+\end{document}

@@ -218,6 +218,112 @@ Cette troisième journée a permis de consolider les pour comprendre le modèle 
 \newpage
 
 %==========================================================
+% JOUR 4
+%==========================================================
+
+\section{Jour 4, fin du cours sur le modèle CRR}
+
+\subsection{Objectifs de la journée}
+\begin{itemize}
+    \item Comprendre comment construire un portefeuille répliquant pour évaluer un produit dérivé.
+    \item Introduire la stratégie de couverture (hedging) via la réplication.
+    \item Définir la probabilité neutre au risque et comprendre son rôle.
+    \item Relier la notion de \(\Delta\)-hedging à la dérivée du prix de l’option.
+\end{itemize}
+
+\subsection{Contenu abordé}
+
+\subsubsection*{Modèle binomial à une période}
+\begin{itemize}
+    \item L’actif risqué vaut \(S_0\) aujourd’hui.
+    \item Il peut évoluer vers \(S_0 u\) (hausse) ou \(S_0 d\) (baisse) à la prochaine période.
+    \item Il existe un actif sans risque avec un taux \(r\).
+\end{itemize}
+
+\subsubsection*{Portefeuille répliquant}
+\begin{itemize}
+    \item On construit un portefeuille de \(\Delta\) actions et \(B\) obligations.
+    \item Objectif : faire en sorte que ce portefeuille reproduise les gains du produit dérivé dans les deux cas futurs.
+    \item Valeur initiale : \(V_0 = \Delta S_0 + B\).
+    \item Valeur finale en cas de hausse : \(V_u = \Delta S_0 u + B(1 + r)\).
+    \item Valeur finale en cas de baisse : \(V_d = \Delta S_0 d + B(1 + r)\).
+\end{itemize}
+
+\subsubsection*{Résolution du système}
+On résout les deux équations :
+\[
+\Delta = \frac{V_u - V_d}{S_0 (u - d)}, \quad B = \frac{u V_d - d V_u}{(1 + r)(u - d)}
+\]
+
+\subsubsection*{Lien avec la couverture}
+\begin{itemize}
+    \item Cette stratégie est appelée \textbf{stratégie de couverture}.
+    \item On annule le risque de marché en prenant une position opposée à celle de l’option.
+    \item \(\Delta\) est appelé \textbf{delta} car il représente la dérivée du prix de l’option par rapport au sous-jacent.
+    \item Cela fonde la notion de \textbf{delta-hedging}.
+\end{itemize}
+
+\subsubsection*{Probabilité neutre au risque}
+\[
+q = \frac{(1 + r) - d}{u - d}, \quad 1 - q = \frac{u - (1 + r)}{u - d}
+\]
+
+\subsubsection*{Formule de valorisation}
+On obtient finalement :
+\[
+\boxed{V_0 = \frac{1}{1 + r} \left( q \cdot V_u + (1 - q) \cdot V_d \right)}
+\]
+Ce qui correspond à la valeur actualisée de l'espérance du produit dérivé sous la probabilité neutre au risque.
+
+\subsection{À suivre...}
+\begin{itemize}
+    \item Développer la convergence du modèle binomial vers le modèle de Black-Scholes.
+\end{itemize}
+
+\subsection{Conclusion}
+\begin{itemize}
+    \item Le modèle CRR permet d’évaluer les options sans arbitrage par réplication.
+    \item Le portefeuille répliquant constitue une stratégie de couverture efficace.
+    \item La notion de \(\Delta\)-hedging est centrale en gestion du risque.
+    \item La probabilité neutre au risque offre un cadre probabiliste puissant pour la valorisation.
+\end{itemize}
+
+\newpage
+
+%==========================================================
+% JOUR 5
+%==========================================================
+
+\section{Jour 5, Implémentation du portefeuille}
+\subsection{Objectifs de la journée}
+\begin{itemize}
+    \item Implémenter un système de gestion de portefeuille (portefeuille multi-options)
+    \item Intégrer une stratégie de couverture (delta hedging) au sein du portefeuille
+    \item Ajouter des tests unitaires pour valider le bon fonctionnement des composants
+\end{itemize}
+
+\subsection{Travail réalisé}
+\begin{itemize}
+    \item Création du fichier \texttt{portfolio.py} pour gérer un ensemble de positions sur options.
+    \item Implémentation du fichier \texttt{hedging.py} pour calculer les deltas et recommander une couverture.
+    \item Résolution d’un bug lié à l’attribut \texttt{pricing\_model} manquant dans le portefeuille.
+    \item Écriture de tests unitaires
+\end{itemize}
+
+\subsection{À suivre...}
+\begin{itemize}
+    \item Ajouter des scénarios dynamiques simulant l’évolution du marché (trajectoire du spot)
+    \item Implémenter une stratégie de rebalancement du hedge à chaque pas de temps
+    \item Intégrer les frais de transaction dans la stratégie de couverture
+    \item Optimiser la visualisation avec des animations ou des courbes interactives
+\end{itemize}
+
+\subsection{Conclusion}
+La journée a permis d’implémenter les bases d’un système cohérent de valorisation de portefeuille avec couverture delta.
+
+\newpage
+
+%==========================================================
 % JOUR N
 %==========================================================
 
