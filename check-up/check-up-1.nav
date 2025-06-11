@@ -23,20 +23,18 @@
 \headcommand {\sectionentry {3}{Travail réalisé}{8}{Travail réalisé}{0}}
 \headcommand {\slideentry {3}{0}{1}{8/8}{}{0}}
 \headcommand {\beamer@framepages {8}{8}}
-\headcommand {\slideentry {3}{0}{2}{9/9}{}{0}}
+\headcommand {\beamer@sectionpages {8}{8}}
+\headcommand {\beamer@subsectionpages {8}{8}}
+\headcommand {\sectionentry {4}{Perspectives}{9}{Perspectives}{0}}
+\headcommand {\slideentry {4}{0}{1}{9/9}{}{0}}
 \headcommand {\beamer@framepages {9}{9}}
-\headcommand {\beamer@sectionpages {8}{9}}
-\headcommand {\beamer@subsectionpages {8}{9}}
-\headcommand {\sectionentry {4}{Perspectives}{10}{Perspectives}{0}}
-\headcommand {\slideentry {4}{0}{1}{10/10}{}{0}}
+\headcommand {\beamer@sectionpages {9}{9}}
+\headcommand {\beamer@subsectionpages {9}{9}}
+\headcommand {\sectionentry {5}{Questions}{10}{Questions}{0}}
+\headcommand {\slideentry {5}{0}{1}{10/10}{}{0}}
 \headcommand {\beamer@framepages {10}{10}}
-\headcommand {\beamer@sectionpages {10}{10}}
+\headcommand {\beamer@partpages {1}{10}}
 \headcommand {\beamer@subsectionpages {10}{10}}
-\headcommand {\sectionentry {5}{Questions}{11}{Questions}{0}}
-\headcommand {\slideentry {5}{0}{1}{11/11}{}{0}}
-\headcommand {\beamer@framepages {11}{11}}
-\headcommand {\beamer@partpages {1}{11}}
-\headcommand {\beamer@subsectionpages {11}{11}}
-\headcommand {\beamer@sectionpages {11}{11}}
-\headcommand {\beamer@documentpages {11}}
-\headcommand {\gdef \inserttotalframenumber {11}}
+\headcommand {\beamer@sectionpages {10}{10}}
+\headcommand {\beamer@documentpages {10}}
+\headcommand {\gdef \inserttotalframenumber {10}}
