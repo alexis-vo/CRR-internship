@@ -324,6 +324,126 @@ La journée a permis d’implémenter les bases d’un système cohérent de val
 \newpage
 
 %==========================================================
+% JOUR 6
+%==========================================================
+
+\section{Jour 6, Préparation entretien}
+\subsection{Objectifs de la journée}
+\begin{itemize}
+    \item Notion de probabilité risque-neutre.
+    \item Question de la volatilité constante.
+    \item Convergence du modèle CRR vers Black-Scholes.
+    \item Préparer l'entretien avec le tuteur.
+\end{itemize}
+
+\subsection{Notions abordées}
+
+\begin{itemize}
+    \item \textbf{Marché frictionless} : absence de coûts de transaction, liquidité parfaite, absence de contraintes sur les ventes à découvert.
+    
+    \item \textbf{Probabilité risque-neutre} :
+    \[
+        p = \frac{e^{r \Delta t} - d}{u - d}
+    \]
+    utilisée pour valoriser les actifs en actualisant les espérances sous une mesure fictive où le taux de croissance est le taux sans risque \(r\).
+
+    \item \textbf{Volatilité constante} : dans le modèle CRR, les facteurs \(u = e^{\sigma \sqrt{\Delta t}}\) et \(d = e^{-\sigma \sqrt{\Delta t}}\) impliquent une volatilité constante au cours du temps.
+
+    \item \textbf{Convergence} : le modèle binomial converge en loi vers un mouvement brownien géométrique :
+    \[
+        \ln S_T \xrightarrow{\text{loi}} \mathcal{N} \left( \ln S_0 + \left(r - \frac{\sigma^2}{2}\right)T,\; \sigma^2 T \right)
+    \]
+
+    \item \textbf{Formules d’actualisation} :
+    \begin{align*}
+        C_0 &= e^{-r \Delta t} \cdot \left( p C_u + (1 - p) C_d \right) \quad \text{(formule continue)} \\
+        V_0 &= \frac{1}{1 + r} \cdot \left( q V_u + (1 - q) V_d \right) \quad \text{(formule discrète)}
+    \end{align*}
+
+    \item \textbf{Approches du modèle binomial} :
+    \begin{itemize}
+        \item \textit{Forward tree} : construction de l’arbre des prix.
+        \item \textit{Backward induction} : valorisation des options par récurrence à rebours à partir des valeurs terminales.
+    \end{itemize}
+\end{itemize}
+
+\subsection{Questions de recherche à discuter}
+
+\begin{itemize}
+    \item Peut-on adapter le modèle CRR à une volatilité non constante ?
+    \item Quelle est la vitesse de convergence vers le modèle de Black-Scholes ?
+    \item Que deviennent les stratégies de couverture delta sous contraintes réelles ?
+    \item Comment le modèle s’étend-il à plusieurs actifs ou à des options exotiques ?
+\end{itemize}
+
+\subsection{À suivre...}
+
+\begin{itemize}
+    \item Étudier en détail la couverture dynamique dans CRR.
+    \item Implémenter le modèle en Python pour simuler la convergence.
+    \item Lire sur les extensions multipériodes ou multinodales du modèle binomial et surtout la convergence vers Black-Scholes.
+\end{itemize}
+
+\subsection{Conclusion}
+
+La journée a permis de bien clarifier les fondements du modèle CRR, d'approfondir les bases théoriques de la valorisation des options par arbitrage, et d'identifier plusieurs directions de recherche intéressantes. La compréhension de la probabilité risque-neutre et de la convergence vers Black-Scholes est maintenant plus claire. Des travaux de modélisation numérique sont prévus pour approfondir.
+\newpage
+
+%==========================================================
+% JOUR 7
+%==========================================================
+
+\section{Jour 7, Entretien et séminaire (digression)}
+\subsection{Objectifs de la journée}
+\begin{itemize}
+    \item Entretien avec le tuteur
+    \item Séminaire \textit{Generative Modeling for Finance}.
+    \item Résumer des exposés du séminaire.
+\end{itemize}
+
+\subsection{Contenu de la journée}
+
+\begin{itemize}
+    \item \textbf{Exposé 1 : Flow matching}
+    \begin{itemize}
+        \item Problème : transformer une loi source \( p \) en une loi cible \( q \) en apprenant une transformation différentiable \( \varphi_\theta \).
+        \item Méthode : apprentissage de la densité \( p^\theta \) à partir d’une équation de continuité du type Liouville.
+        \item Implémentation : modèle de champ de vitesse \( u_t^\theta \) paramétré par un réseau de neurones et intégré numériquement.
+    \end{itemize}
+    
+    \item \textbf{Exposé 2 : Conditional Flow Matching}
+    \begin{itemize}
+        \item Objectif : apprendre un flot conditionné sur l’état final \( x_1 \), pour générer efficacement les dynamiques de transition.
+        \item Résultat central : les pertes de flow matching marginal et conditionnel ont le même gradient.
+        \item Perspectives d’application : modélisation de dynamiques de marché conditionnelles en finance quantitative.
+    \end{itemize}
+
+    \item \textbf{Travail personnel} : rédaction d’un résumé des deux exposés et compréhension pro-active post-séminaire.
+\end{itemize}
+
+\subsection{À suivre...}
+La poursuite de cette étude n'est pas au programme. Nous reviendrons sur les objectifs du stage ayant pour sujet principal le modèle binomial de Cox-Ross-Rubinstein.
+
+\subsection{Conclusion}
+Journée dense et riche en contenu théorique. Les exposés ont permis de découvrir une approche moderne du transport de mesures, basée sur l’apprentissage de champs de vitesse via des équations différentielles. La rédaction du résumé a facilité l’appropriation des concepts.
+
+\newpage
+
+%==========================================================
+% JOUR 8
+%==========================================================
+
+\section{Jour 8, Implémentations}
+\subsection{Objectifs de la journée}
+\begin{itemize}
+    \item ...
+\end{itemize}
+\subsection{...}
+\subsection{À suivre...}
+\subsection{Conclusion}
+\newpage
+
+%==========================================================
 % JOUR N
 %==========================================================
 
