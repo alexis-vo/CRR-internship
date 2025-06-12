@@ -5,8 +5,8 @@ from pathlib import Path
 sys.path.append(str(Path(__file__).parent.parent))
 
 from decimal import Decimal
-from core.options import OptionType, OptionOrigin, Option
-from core.options import EuropeanOption, AmericanOption, ExoticOption, BarrierOption
+from core.options import OptionType
+from core.options import EuropeanOption, AmericanOption, BarrierOption
 from models.binomial import binomial_option_pricing
 
 class TestBinomialModel(unittest.TestCase):

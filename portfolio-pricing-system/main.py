@@ -37,8 +37,8 @@ def example_of_portfolio_with_crr_model():
 
     # Build the portfolio
     portfolio = Portfolio(pricing_model=binomial_option_pricing)
-    portfolio.add_position(call_eur, quantity=10)
-    portfolio.add_position(put_amer, quantity=5)
+    portfolio.add_position(Position(call_eur, quantity=10))
+    portfolio.add_position(Position(put_amer, quantity=5))
 
     spot = Decimal("100")
 
@@ -52,7 +52,7 @@ def example_of_portfolio_with_crr_model():
         print(f"- {pos.option.option_type.name} ({'American' if isinstance(pos.option, AmericanOption) else 'European'}) x{pos.quantity}: {price:.4f}")
 
     # Total portfolio value
-    total_value = portfolio.total_value()
+    total_value = portfolio.total_value(spot=Decimal("100"), pricing_model=binomial_option_pricing)
     print(f"\n=== Total Portfolio Value ===\n${total_value:.4f}")
 
     # Delta hedging

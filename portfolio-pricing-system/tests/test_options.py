@@ -5,10 +5,7 @@ from pathlib import Path
 sys.path.append(str(Path(__file__).parent.parent))
 
 from decimal import Decimal
-from core.options import OptionType, OptionOrigin, Option
-from core.options import EuropeanOption, AmericanOption, ExoticOption, BarrierOption
-from models.binomial import binomial_option_pricing
-
+from core.options import OptionType, EuropeanOption, AmericanOption, ExoticOption, BarrierOption
 
 class TestOptions(unittest.TestCase):
     def setUp(self):
@@ -71,40 +68,6 @@ class TestOptions(unittest.TestCase):
 
         spot_above_barrier = Decimal("96")
         self.assertEqual(option.payoff(spot_above_barrier), Decimal("0"))
-
-    def test_barrier_origin(self):
-        option = BarrierOption(OptionType.CALL, self.spot, self.strike, self.maturity, self.volatility, self.rate, self.barrier_level)
-        origin = option.origin()
-        self.assertIn('bar', origin)
-            
-    def test_option_origin(self):
-        option = EuropeanOption(OptionType.CALL, self.spot, self.strike, self.maturity, self.volatility, self.rate)
-        origin = option.origin()
-        self.assertIn('eur', origin)
-        self.assertNotIn('usa', origin)
-        self.assertNotIn('exo', origin)
-        self.assertNotIn('bar', origin)
-
-        option = AmericanOption(OptionType.PUT, self.spot, self.strike, self.maturity, self.volatility, self.rate)
-        origin = option.origin()
-        self.assertIn('usa', origin)
-        self.assertNotIn('eur', origin)
-        self.assertNotIn('exo', origin)
-        self.assertNotIn('bar', origin)
-
-        option = ExoticOption(OptionType.CALL, self.spot, self.strike, self.maturity, self.volatility, self.rate)
-        origin = option.origin()
-        self.assertIn('exo', origin)
-        self.assertNotIn('eur', origin)
-        self.assertNotIn('usa', origin)
-        self.assertNotIn('bar', origin)
-
-        option = BarrierOption(OptionType.PUT, self.spot, self.strike, self.maturity, self.volatility, self.rate, Decimal('110'))
-        origin = option.origin()
-        self.assertIn('bar', origin)
-        self.assertNotIn('eur', origin)
-        self.assertNotIn('usa', origin)
-        self.assertNotIn('exo', origin)
     
 if __name__ == '__main__':
     unittest.main()

@@ -10,29 +10,6 @@ class OptionType(Enum):
     FUTURE = "future"
     FORWARD = "forward"
 
-class OptionOrigin:
-    def __init__(self):
-        self.origin = {
-            'eur': False,  # Européennes
-            'usa': False,  # Américaines
-            'exo': False,  # Exotiques
-            'bar': False   # Barrier'
-        }
-        self.true_keys = [key for key, value in self.origin.items() if value]
-
-    def set_option(self, key, value):
-        if key in self.origin:
-            self.origin[key] = value
-            if value and key not in self.true_keys:
-                self.true_keys.append(key)
-            elif not value and key in self.true_keys:
-                self.true_keys.remove(key)
-        else:
-            print(f"Option {key} non trouvée.")
-
-    def get_true_keys(self):
-        return self.true_keys
-
 class Option(ABC):
     def __init__(self, option_type: OptionType, spot: Decimal, strike: Decimal, maturity: Decimal, volatility: Decimal, rate: Decimal):
         if volatility < Decimal("0") or rate < Decimal("0"):
@@ -47,7 +24,6 @@ class Option(ABC):
             raise ValueError("Invalid option type provided.")
 
         self.option_type = option_type
-        self.option_origin = OptionOrigin()
         self.spot = spot
         self.strike = strike
         self.maturity = maturity
@@ -58,10 +34,6 @@ class Option(ABC):
     def payoff(self, spot: Decimal) -> Decimal:
         pass
 
-    @abstractmethod
-    def origin(self):
-        pass
-
 class EuropeanOption(Option):
     def payoff(self, spot: Decimal) -> Decimal:
         if self.option_type == OptionType.CALL:
@@ -69,20 +41,12 @@ class EuropeanOption(Option):
         else:
             return max(self.strike - spot, Decimal("0"))
 
-    def origin(self):
-        self.option_origin.set_option('eur', True)
-        return self.option_origin.get_true_keys()
-
 class AmericanOption(Option):
     def payoff(self, spot: Decimal) -> Decimal:
         if self.option_type == OptionType.CALL:
             return max(spot - self.strike, Decimal("0"))
         else:
             return max(self.strike - spot, Decimal("0"))
-
-    def origin(self):
-        self.option_origin.set_option('usa', True)
-        return self.option_origin.get_true_keys()
 
 ###############
 # TODO
@@ -94,10 +58,6 @@ class ExoticOption(Option):
             return max(spot - self.strike, Decimal("0"))
         else:
             return max(self.strike - spot, Decimal("0"))
-
-    def origin(self):
-        self.option_origin.set_option('exo', True)
-        return self.option_origin.get_true_keys()
     
 class BarrierOption(Option):
     def __init__(self, option_type: OptionType, spot: Decimal, strike: Decimal, maturity: Decimal, volatility: Decimal, rate: Decimal, barrier_level: Decimal):
@@ -111,38 +71,18 @@ class BarrierOption(Option):
             return Decimal("0")
         return super().payoff(spot)
 
-    def origin(self):
-        self.option_origin.set_option('bar', True)
-        return self.option_origin.get_true_keys()
-
 class BondOption(Option):
     def payoff(self, spot: Decimal) -> Decimal:
         return max(spot - self.strike, Decimal("0"))
-
-    def origin(self):
-        self.option_origin.set_option('eur', True)  # Assuming bond options are European
-        return self.option_origin.get_true_keys()
     
 class SwapOption(Option):
     def payoff(self, spot: Decimal) -> Decimal:
         return max(spot - self.strike, Decimal("0"))
-
-    def origin(self):
-        self.option_origin.set_option('exo', True)  # Assuming swap options are exotic
-        return self.option_origin.get_true_keys()
     
 class FutureOption(Option):
     def payoff(self, spot: Decimal) -> Decimal:
         return max(spot - self.strike, Decimal("0"))
 
-    def origin(self):
-        self.option_origin.set_option('exo', True)  # Assuming future options are exotic
-        return self.option_origin.get_true_keys()
-
 class ForwardOption(Option):
     def payoff(self, spot: Decimal) -> Decimal:
         return max(spot - self.strike, Decimal("0"))
-
-    def origin(self):
-        self.option_origin.set_option('exo', True)  # Assuming forward options are exotic
-        return self.option_origin.get_true_keys()

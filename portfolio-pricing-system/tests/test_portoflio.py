@@ -31,9 +31,13 @@ class TestPortfolio(unittest.TestCase):
         self.portfolio.add_position(Position(self.put_amer, quantity=5))
 
     def test_total_value(self):
-        value = self.portfolio.total_value(spot=Decimal("100"), pricing_model=binomial_option_pricing)
+        value = self.portfolio.total_value(spot=Decimal("100"))
         self.assertGreater(value, 0)
 
     def test_summary_runs(self):
         # This test only checks if the summary method runs without errors (not the output)
-        self.portfolio.summary(spot=Decimal("100"), pricing_model=binomial_option_pricing)
+        self.portfolio.summary()
+
+    
+if __name__ == '__main__':
+    unittest.main()
