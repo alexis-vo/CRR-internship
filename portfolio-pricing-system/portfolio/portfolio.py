@@ -29,4 +29,4 @@ class Portfolio:
         for i, pos in enumerate(self.positions):
             val = pos.value(spot, self.pricing_model)
             print(f"Position {i+1}: {pos.quantity} x {pos.option.__class__.__name__} ({pos.option.option_type.value}) → Value: {val}")
-        print(f"Total Portfolio Value: {self.total_value(spot, self.pricing_model)}")
+        print(f"Total Portfolio Value: {self.total_value(spot)}")

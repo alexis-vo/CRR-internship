@@ -35,8 +35,7 @@ class TestPortfolio(unittest.TestCase):
         self.assertGreater(value, 0)
 
     def test_summary_runs(self):
-        # This test only checks if the summary method runs without errors (not the output)
-        self.portfolio.summary()
+        self.portfolio.summary(spot=100)
 
     
 if __name__ == '__main__':
