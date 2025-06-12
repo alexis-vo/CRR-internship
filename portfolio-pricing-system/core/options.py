@@ -11,7 +11,7 @@ class OptionType(Enum):
     FORWARD = "forward"
 
 class Option(ABC):
-    def __init__(self, option_type: OptionType, spot: Decimal, strike: Decimal, maturity: Decimal, volatility: Decimal, rate: Decimal):
+    def __init__(self, option_type: OptionType, spot: Decimal, strike: Decimal, maturity: Decimal, volatility: Decimal, rate: Decimal, asset_name="UNKNOWN"):
         if volatility < Decimal("0") or rate < Decimal("0"):
             raise ValueError("Volatility and rate must be non-negative.")
         if maturity <= Decimal("0"):
@@ -29,6 +29,7 @@ class Option(ABC):
         self.maturity = maturity
         self.volatility = volatility
         self.rate = rate
+        self.asset_name = asset_name
 
     @abstractmethod
     def payoff(self, spot: Decimal) -> Decimal:
@@ -70,6 +71,10 @@ class BarrierOption(Option):
         if (self.option_type == OptionType.CALL and spot < self.barrier_level) or (self.option_type == OptionType.PUT and spot > self.barrier_level):
             return Decimal("0")
         return super().payoff(spot)
+
+class LookbackOption(Option):
+    #TODO
+    ...
 
 class BondOption(Option):
     def payoff(self, spot: Decimal) -> Decimal:

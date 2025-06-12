@@ -50,7 +50,7 @@ class TestBinomialModel(unittest.TestCase):
             maturity=Decimal("1"),
             volatility=Decimal("0.2"),
             rate=Decimal("0.05"),
-            barrier_level=Decimal("90")  # spot = 100 > 90, donc put barré KO si spot > bar
+            barrier_level=Decimal("90")
         )
 
     def test_european_call_value(self):
@@ -58,13 +58,14 @@ class TestBinomialModel(unittest.TestCase):
         self.assertAlmostEqual(float(value), 10.45, places=1)
 
     def test_american_call_value(self):
-        value = binomial_option_pricing(self.call_amer, steps=100)
-        self.assertGreaterEqual(value, binomial_option_pricing(self.call_euro, steps=100))
+        value_amer = binomial_option_pricing(self.call_amer, steps=100)
+        value_euro = binomial_option_pricing(self.call_euro, steps=100)
+        self.assertGreaterEqual(value_amer, value_euro)
 
     def test_american_put_value(self):
         value = binomial_option_pricing(self.put_amer, steps=100)
         self.assertTrue(value > Decimal("5.5"))
-    
+
     def test_european_put_value(self):
         value = binomial_option_pricing(self.put_euro, steps=100)
         self.assertAlmostEqual(float(value), 5.57, places=1)

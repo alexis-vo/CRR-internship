@@ -3,7 +3,8 @@ from math import exp, sqrt
 from core.options import AmericanOption
 
 
-def binomial_option_pricing(option, steps=1000, return_tree=False):
+def binomial_option_pricing(option, spot=None, steps=1000, return_tree=False):
+    spot = option.spot
     with localcontext() as ctx:
         ctx.prec = 28
 
@@ -21,7 +22,7 @@ def binomial_option_pricing(option, steps=1000, return_tree=False):
 
         # Terminal nodes
         for i in range(steps + 1):
-            S = option.spot * (u ** i) * (d ** (steps - i))
+            S = spot * (u ** i) * (d ** (steps - i))
             option_tree[steps][i] = option.payoff(S)
 
         # Backward induction
@@ -29,7 +30,7 @@ def binomial_option_pricing(option, steps=1000, return_tree=False):
             for i in range(t + 1):
                 continuation = discount * (p * option_tree[t + 1][i + 1] + (1 - p) * option_tree[t + 1][i])
                 if isinstance(option, AmericanOption):
-                    S = option.spot * (u ** i) * (d ** (t - i))
+                    S = spot * (u ** i) * (d ** (t - i))
                     exercise = option.payoff(S)
                     option_tree[t][i] = max(continuation, exercise)
                 else:
