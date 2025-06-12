@@ -3,12 +3,14 @@ from core.options import EuropeanOption, AmericanOption, OptionType
 from models.binomial import binomial_option_pricing
 from portfolio.portfolio import Portfolio, Position
 from portfolio.hedging import HedgingStrategy
+from portfolio.moneyness import moneyness
 from utils.visualization import plot_hedging_deltas, plot_portfolio_values_over_time, plot_binomial_tree
 
 def display_option_data(option, quantity):
     print(f"- {option.option_type.name} ({'American' if isinstance(option, AmericanOption) else 'European'}) x{quantity}")
     print(f"  Spot     : {option.spot}")
     print(f"  Strike   : {option.strike}")
+    print(f"  Moneyness: {moneyness(option)}")
     print(f"  Maturity : {option.maturity}")
     print(f"  Volatility: {option.volatility}")
     print(f"  Rate     : {option.rate}")
@@ -73,7 +75,7 @@ def example_of_visualization():
         rate=Decimal("0.05")
     )
     price, tree = binomial_option_pricing(my_option, steps=5, return_tree=True)
-    # plot_binomial_tree(tree)
+    plot_binomial_tree(tree)
 
     portfolio_values = [100, 105, 102, 107, 110]
     plot_portfolio_values_over_time(portfolio_values)

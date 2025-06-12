@@ -1,7 +1,7 @@
 from decimal import Decimal, getcontext, localcontext
 from math import exp, sqrt
 
-def binomial_option_pricing(option, steps=100, return_tree=False):
+def binomial_option_pricing(option, steps=1000, return_tree=False):
     with localcontext() as ctx:
         ctx.prec = 28
 
@@ -26,7 +26,8 @@ def binomial_option_pricing(option, steps=100, return_tree=False):
         for t in reversed(range(steps)):
             for i in range(t + 1):
                 continuation = discount * (p * option_tree[t + 1][i + 1] + (1 - p) * option_tree[t + 1][i])
-                if option.origin() == 'usa':
+                if isinstance(option, option.AmericanOption):
+                    print("USA!!!!")
                     S = option.spot * (u ** i) * (d ** (t - i))
                     exercise = option.payoff(S)
                     option_tree[t][i] = max(continuation, exercise)
