@@ -70,5 +70,29 @@ class TestBinomialModel(unittest.TestCase):
         value = binomial_option_pricing(self.put_euro, steps=100)
         self.assertAlmostEqual(float(value), 5.57, places=1)
 
-if __name__ == '__main__':
-    unittest.main()
+
+# option = EuropeanOption(
+#     option_type=OptionType.CALL,
+#     spot=Decimal('100'),
+#     strike=Decimal('100'),
+#     rate=Decimal('0.05'),
+#     volatility=Decimal('0.2'),
+#     maturity=Decimal('1')
+# )
+
+option = AmericanOption(
+    option_type=OptionType.PUT,
+    spot=Decimal(50),
+    strike=Decimal(52),
+    maturity=Decimal(1),
+    rate=Decimal(0.05),
+    volatility=Decimal(0.3),
+)
+
+price, tree = binomial_option_pricing(option, steps=3, return_tree=True, print_tree=True, visualize=True)
+print(f"\nPrix de l'option : {price:.4f}")
+
+
+
+# if __name__ == '__main__':
+#     unittest.main()

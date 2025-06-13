@@ -434,6 +434,53 @@ Journée dense et riche en contenu théorique. Les exposés ont permis de décou
 %==========================================================
 
 \section{Jour 8, Implémentations}
+
+\subsection{Objectifs de la journée}
+\begin{itemize}
+    \item Déboguer les erreurs du modèle binomial pour le pricing d’options européennes et américaines.
+    \item Corriger et faire passer les tests unitaires dans \texttt{test\_binomial.py} et \texttt{test\_portfolio.py}.
+    \item S’assurer que les options soient correctement valorisées dans un portefeuille en utilisant une structure flexible.
+\end{itemize}
+
+\subsection{Débogage du modèle binomial}
+
+J'ai rencontré une série d'erreurs \texttt{TypeError} dues à un champ \texttt{spot} non défini dans les objets d’options passés à la fonction \texttt{binomial\_option\_pricing}. Ces erreurs ont été corrigées en modifiant la fonction pour extraire systématiquement les paramètres depuis l’objet option :
+
+\begin{itemize}
+    \item \texttt{spot = option.spot}
+    \item \texttt{strike = option.strike}
+\end{itemize}
+
+Cela a permis de rendre la fonction indépendante du passage d’arguments externes incohérents ou manquants.
+
+\subsection{Correction des tests du portefeuille}
+
+Dans le fichier \texttt{test\_portfolio.py}, deux erreurs bloquaient les tests :
+\begin{itemize}
+    \item \texttt{TypeError} lié à un argument \texttt{spot\_dict} manquant.
+    \item \texttt{KeyError: 'UNKNOWN'} provoqué par un attribut \texttt{asset\_name} non renseigné dans les options.
+\end{itemize}
+
+J'ai corrigé ces erreurs en spécifiant explicitement \texttt{asset\_name = "AAPL"} ou \texttt{"TSLA"} dans les objets \texttt{EuropeanOption} et \texttt{AmericanOption}. Passant un \texttt{spot\_dict} cohérent à toutes les fonctions dépendantes du portefeuille. Tous les tests passent désormais sans erreur.
+
+\subsection{À suivre...}
+\begin{itemize}
+    \item Étendre les tests à d’autres types de portefeuilles, y compris des paniers d’options hétérogènes.
+    \item Implémenter une gestion plus robuste des erreurs dans le pricing model (ex. : option non prenable par le modèle).
+    \item Commencer la structuration de l’interface utilisateur (ex: Streamlit).
+\end{itemize}
+
+\subsection{Conclusion}
+
+Aujourd'hui j'ai pu fiabiliser le modèle de valorisation binomiale et assurer son intégration correcte dans le système de portefeuille. Le pipeline de test unitaire est désormais stable pour les cas de base, ce qui constitue un socle solide pour ajouter de nouvelles fonctionnalités dans les jours à venir.
+
+\newpage
+
+%==========================================================
+% JOUR 9
+%==========================================================
+
+\section{Jour 9, Implémentations}
 \subsection{Objectifs de la journée}
 \begin{itemize}
     \item ...

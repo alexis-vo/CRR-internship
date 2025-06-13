@@ -1,0 +1,71 @@
+// Option Tree
+digraph {
+	nodesep=0.5 rankdir=LR ranksep=0.75
+	"0_0" [label="t=0
+S=50.00
+V=6.28" fillcolor=lightblue fontcolor=black shape=circle style=filled]
+	"1_0" [label="t=1
+S=42.05
+V=10.50" fillcolor=lightblue fontcolor=black shape=circle style=filled]
+	"1_1" [label="t=1
+S=59.46
+V=2.36" fillcolor=lightblue fontcolor=black shape=circle style=filled]
+	"2_0" [label="t=2
+S=35.36
+V=16.64" fillcolor=lightcoral fontcolor=black shape=circle style=filled]
+	"2_1" [label="t=2
+S=50.00
+V=4.84" fillcolor=lightblue fontcolor=black shape=circle style=filled]
+	"2_2" [label="t=2
+S=70.70
+V=0.00" fillcolor=lightblue fontcolor=black shape=circle style=filled]
+	"3_0" [label="t=3
+S=29.74
+V=22.26" fillcolor=lightblue fontcolor=black shape=circle style=filled]
+	"3_1" [label="t=3
+S=42.05
+V=9.95" fillcolor=lightblue fontcolor=black shape=circle style=filled]
+	"3_2" [label="t=3
+S=59.46
+V=0.00" fillcolor=lightblue fontcolor=black shape=circle style=filled]
+	"3_3" [label="t=3
+S=84.07
+V=0.00" fillcolor=lightblue fontcolor=black shape=circle style=filled]
+	"0_0" -> "1_1" [label=u fontsize=10]
+	"0_0" -> "1_0" [label=d fontsize=10]
+	"1_0" -> "2_1" [label=u fontsize=10]
+	"1_0" -> "2_0" [label=d fontsize=10]
+	"1_1" -> "2_2" [label=u fontsize=10]
+	"1_1" -> "2_1" [label=d fontsize=10]
+	"2_0" -> "3_1" [label=u fontsize=10]
+	"2_0" -> "3_0" [label=d fontsize=10]
+	"2_1" -> "3_2" [label=u fontsize=10]
+	"2_1" -> "3_1" [label=d fontsize=10]
+	"2_2" -> "3_3" [label=u fontsize=10]
+	"2_2" -> "3_2" [label=d fontsize=10]
+	subgraph cluster_legend {
+		fontname=Helvetica fontsize=12 label="Légende"
+		color=gray style=dashed
+		legend_exercise [label="" fillcolor=lightcoral fixedsize=true fontsize=12 height=0.25 shape=circle style=filled width=0.25]
+		legend_hold [label="" fillcolor=lightblue fixedsize=true fontsize=12 height=0.25 shape=circle style=filled width=0.25]
+		legend_exercise_label [label="Exercice anticipé" fontsize=12 shape=plaintext]
+		legend_hold_label [label="Conservation (valeur future)" fontsize=12 shape=plaintext]
+		legend_exercise -> legend_exercise_label [style=invis]
+		legend_hold -> legend_hold_label [style=invis]
+		legend_exercise_label -> legend_hold [style=invis]
+	}
+	"0_0" -> time_label_0 [style=invis]
+	"1_0" -> time_label_1 [style=invis]
+	"2_1" -> time_label_2 [style=invis]
+	"3_1" -> time_label_3 [style=invis]
+	time_label_0 -> time_label_1 [style=invis]
+	time_label_1 -> time_label_2 [style=invis]
+	time_label_2 -> time_label_3 [style=invis]
+	subgraph cluster_time_labels {
+		label="" rank=same style=invis
+		time_label_0 [label="t = 0" fontsize=12 shape=plaintext]
+		time_label_1 [label="t = 1" fontsize=12 shape=plaintext]
+		time_label_2 [label="t = 2" fontsize=12 shape=plaintext]
+		time_label_3 [label="t = 3" fontsize=12 shape=plaintext]
+	}
+}
