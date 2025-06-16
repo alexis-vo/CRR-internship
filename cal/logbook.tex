@@ -481,6 +481,38 @@ Aujourd'hui j'ai pu fiabiliser le modèle de valorisation binomiale et assurer s
 %==========================================================
 
 \section{Jour 9, Implémentations}
+
+\subsection{Objectifs de la journée}
+\begin{itemize}
+    \item Générer un arbre binomial de valorisation d'option dans le terminal puis avec Graphviz.
+    \item Mettre en évidence les points d'exercice anticipé dans le cas d'une option américaine.
+    \item Ajouter une légende visuelle pour clarifier les couleurs utilisées dans le graphe.
+\end{itemize}
+
+\subsection{Travail réalisé}
+\begin{itemize}
+    \item Ajout d’un affichage texte de l’arbre binomial : valeurs de l’actif et de l’option à chaque nœud.
+    \item Intégration de Graphviz pour produire une représentation graphique de l’arbre.
+    \item Mise en couleur des nœuds selon que l’option est exercée ou non (exercice anticipé en rouge, conservation en bleu).
+    \item Tests pour identifier des cas où l’exercice anticipé peut survenir mais pas systématiquement.
+\end{itemize}
+
+\subsection{À suivre...}
+\begin{itemize}
+    \item Permettre l'affichage interactif ou animé de l’arbre (via une interface web avec Streamlit).
+    \item Étendre la visualisation à un portefeuille d’options (superposition ou juxtaposition d’arbres).
+    \item Tester avec différents types d’options : put américain, call américain, européens...
+\end{itemize}
+
+\subsection{Conclusion}
+Valorisation par arbre binomial en visualisant le cheminement de la valeur de l’option. Les ajustements esthétiques et logiques apportés aux graphes ouvrent la voie à de futures extensions interactives/pédagogiques.
+\newpage
+
+%==========================================================
+% JOUR 10
+%==========================================================
+
+\section{Jour 10, Implémentations}
 \subsection{Objectifs de la journée}
 \begin{itemize}
     \item ...
@@ -503,6 +535,7 @@ Aujourd'hui j'ai pu fiabiliser le modèle de valorisation binomiale et assurer s
 \subsection{À suivre...}
 \subsection{Conclusion}
 \newpage
+
 
 %==========================================================
 \end{document}
