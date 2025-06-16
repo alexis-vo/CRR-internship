@@ -89,7 +89,7 @@ option = AmericanOption(
     volatility=Decimal(0.3),
 )
 
-price, tree = binomial_option_pricing(option, steps=3, return_tree=True, print_tree=True, visualize=True)
+price, tree = binomial_option_pricing(option, steps=3, return_tree=True, visualize_t=True)
 print(f"\nPrix de l'option : {price:.4f}")
 
 

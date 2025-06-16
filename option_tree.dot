@@ -2,35 +2,65 @@
 digraph {
 	nodesep=0.5 rankdir=LR ranksep=0.75
 	"0_0" [label="t=0
-S=50.00
-V=6.28" fillcolor=lightblue fontcolor=black shape=circle style=filled]
+S=100.00
+V=11.04" fillcolor=lightblue height=0.7 pos="0.0,0.0!" width=0.7]
+	"0_0" [label="t=0
+S=100.00
+V=11.04" fillcolor=lightblue fontcolor=black shape=circle style=filled]
 	"1_0" [label="t=1
-S=42.05
-V=10.50" fillcolor=lightblue fontcolor=black shape=circle style=filled]
+S=89.09
+V=3.50" fillcolor=lightblue height=0.7 pos="1.5,0.0!" width=0.7]
+	"1_0" [label="t=1
+S=89.09
+V=3.50" fillcolor=lightblue fontcolor=black shape=circle style=filled]
 	"1_1" [label="t=1
-S=59.46
-V=2.36" fillcolor=lightblue fontcolor=black shape=circle style=filled]
+S=112.24
+V=17.71" fillcolor=lightblue height=0.7 pos="1.5,-1.5!" width=0.7]
+	"1_1" [label="t=1
+S=112.24
+V=17.71" fillcolor=lightblue fontcolor=black shape=circle style=filled]
 	"2_0" [label="t=2
-S=35.36
-V=16.64" fillcolor=lightcoral fontcolor=black shape=circle style=filled]
+S=79.38
+V=0.00" fillcolor=lightblue height=0.7 pos="3.0,0.0!" width=0.7]
+	"2_0" [label="t=2
+S=79.38
+V=0.00" fillcolor=lightblue fontcolor=black shape=circle style=filled]
 	"2_1" [label="t=2
-S=50.00
-V=4.84" fillcolor=lightblue fontcolor=black shape=circle style=filled]
+S=100.00
+V=6.55" fillcolor=lightblue height=0.7 pos="3.0,-1.5!" width=0.7]
+	"2_1" [label="t=2
+S=100.00
+V=6.55" fillcolor=lightblue fontcolor=black shape=circle style=filled]
 	"2_2" [label="t=2
-S=70.70
-V=0.00" fillcolor=lightblue fontcolor=black shape=circle style=filled]
+S=125.98
+V=27.63" fillcolor=lightblue height=0.7 pos="3.0,-3.0!" width=0.7]
+	"2_2" [label="t=2
+S=125.98
+V=27.63" fillcolor=lightblue fontcolor=black shape=circle style=filled]
 	"3_0" [label="t=3
-S=29.74
-V=22.26" fillcolor=lightblue fontcolor=black shape=circle style=filled]
+S=70.72
+V=0.00" fillcolor=lightblue height=0.7 pos="4.5,0.0!" width=0.7]
+	"3_0" [label="t=3
+S=70.72
+V=0.00" fillcolor=lightblue fontcolor=black shape=circle style=filled]
 	"3_1" [label="t=3
-S=42.05
-V=9.95" fillcolor=lightblue fontcolor=black shape=circle style=filled]
+S=89.09
+V=0.00" fillcolor=lightblue height=0.7 pos="4.5,-1.5!" width=0.7]
+	"3_1" [label="t=3
+S=89.09
+V=0.00" fillcolor=lightblue fontcolor=black shape=circle style=filled]
 	"3_2" [label="t=3
-S=59.46
-V=0.00" fillcolor=lightblue fontcolor=black shape=circle style=filled]
+S=112.24
+V=12.24" fillcolor=lightblue height=0.7 pos="4.5,-3.0!" width=0.7]
+	"3_2" [label="t=3
+S=112.24
+V=12.24" fillcolor=lightblue fontcolor=black shape=circle style=filled]
 	"3_3" [label="t=3
-S=84.07
-V=0.00" fillcolor=lightblue fontcolor=black shape=circle style=filled]
+S=141.40
+V=41.40" fillcolor=lightblue height=0.7 pos="4.5,-4.5!" width=0.7]
+	"3_3" [label="t=3
+S=141.40
+V=41.40" fillcolor=lightblue fontcolor=black shape=circle style=filled]
 	"0_0" -> "1_1" [label=u fontsize=10]
 	"0_0" -> "1_0" [label=d fontsize=10]
 	"1_0" -> "2_1" [label=u fontsize=10]
@@ -53,19 +83,5 @@ V=0.00" fillcolor=lightblue fontcolor=black shape=circle style=filled]
 		legend_exercise -> legend_exercise_label [style=invis]
 		legend_hold -> legend_hold_label [style=invis]
 		legend_exercise_label -> legend_hold [style=invis]
-	}
-	"0_0" -> time_label_0 [style=invis]
-	"1_0" -> time_label_1 [style=invis]
-	"2_1" -> time_label_2 [style=invis]
-	"3_1" -> time_label_3 [style=invis]
-	time_label_0 -> time_label_1 [style=invis]
-	time_label_1 -> time_label_2 [style=invis]
-	time_label_2 -> time_label_3 [style=invis]
-	subgraph cluster_time_labels {
-		label="" rank=same style=invis
-		time_label_0 [label="t = 0" fontsize=12 shape=plaintext]
-		time_label_1 [label="t = 1" fontsize=12 shape=plaintext]
-		time_label_2 [label="t = 2" fontsize=12 shape=plaintext]
-		time_label_3 [label="t = 3" fontsize=12 shape=plaintext]
 	}
 }
