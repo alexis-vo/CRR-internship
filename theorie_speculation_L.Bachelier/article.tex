@@ -15,13 +15,13 @@
 \pagestyle{fancy}
 \fancyhf{}
 \rhead{\thepage}
-\lhead{Théorie de la spéculation – thèse de Louis Bachelier (1900)}
+\lhead{Théorie de la spéculation – thèse de Louis Bachelier, 1900}
 
 \usepackage{titling}
 \renewcommand\maketitlehooka{\null\mbox{}\vfill}
 \renewcommand\maketitlehookd{\vfill\null}
 
-\title{\Huge{\textbf{Théorie de la spéculation\\ Louis Bachelier (1900)}}\\ \medskip
+\title{\Huge{\textbf{Théorie de la spéculation\\ Louis Bachelier, 1900}}\\ \medskip
       \Huge{\textit{Article résumé}}\vspace*{0.7cm}}
 \author{\LARGE{Alexis VO}\vspace{1cm}\\ \medskip
       Université Paris-Saclay\\École polytechnique}
@@ -39,7 +39,7 @@
 \tableofcontents
 
 \begin{abstract}
-En 1900, Louis Bachelier soutient une thèse qui donnera par la suite les bases d’une approche probabiliste des marchés financiers : \textit{La théorie de la spéculation}. Je vous propose dans cet article un résumé après une lecture approfondie de ce texte fondateur. Il s'inscrit dans le cadre de mon stage ayant pour sujet le \textit{Modèle de Cox Ross Rubinstein}. Nous évoquerons les idées de ce mathématicien novateur dans leur contexte historique, en analysant ses modèles mathématiques, et en mettant en lumière leur influence sur la finance moderne. Enfin, nous présenterons les concepts de cours vrai, de prime, d’option et d’équation de la diffusion à travers la modélisation proposée par Bachelier.
+En 1900, Louis Bachelier soutient une thèse qui donnera par la suite les bases d’une approche probabiliste des marchés financiers : \textit{La théorie de la spéculation}. Je vous propose dans cet article un résumé après une lecture approfondie de ce texte fondateur. Il s'inscrit dans le cadre de mon stage ayant pour sujet principal le \textit{Modèle de Cox Ross Rubinstein}. Nous évoquerons les idées de ce mathématicien novateur dans leur contexte historique, en analysant ses modèles mathématiques, et en mettant en lumière leur influence sur la finance moderne. Enfin, nous présenterons les concepts de cours vrai, de prime, d’option et d’équation de la diffusion à travers la modélisation proposée par Bachelier.
 \end{abstract}
 
 \newpage
@@ -48,25 +48,25 @@ En 1900, Louis Bachelier soutient une thèse qui donnera par la suite les bases 
 
 \subsection{Contexte historique}
 
-Au tournant du XX\textsuperscript{e} siècle, les marchés financiers comme la Bourse de Paris, connaissent une forte expansion. Les opérations de spéculation y sont nombreuses, mais leur analyse reste essentiellement empirique et intuitive. À cette époque, la probabilité est encore principalement appliquée aux jeux de hasard. Nul ne l'imagine l’appliquer aux mouvements financiers, considérés encore comme trop chaotiques.
+Au tournant du XX\textsuperscript{e} siècle, les marchés financiers comme la \textit{Bourse de Paris}, connaissent une forte expansion. Les opérations de spéculation y sont nombreuses, mais leur analyse reste essentiellement empirique et intuitive. À cette époque, la probabilité est encore principalement appliquée aux jeux de hasard. Nul ne l'imagine l’appliquer aux mouvements financiers, considérés encore comme trop chaotiques.
 
 C’est dans ce contexte que Louis Bachelier, jeune mathématicien français, propose en 1900 une thèse intitulée \textit{Théorie de la spéculation}. Il modélise mathématiquement les fluctuations boursières en utilisant le calcul des probabilités. Il devient alors le fondateur des mathématiques financières.
 
 \subsection{Présentation de Louis Bachelier}
 
-Louis Bachelier (1870–1946) est un mathématicien français formé à la Sorbonne et élève de Paul Appell. Sa thèse est novatrice à bien des égards : elle est la première à proposer une modélisation stochastique du marché financier. Bien qu’initialement peu reconnue, son œuvre sera redécouverte au XX\textsuperscript{e} siècle, notamment par les économistes et mathématiciens anglo-saxons.
+Louis Bachelier (1870–1946) est un mathématicien français formé à la Sorbonne. Sa thèse est novatrice à bien des égards : elle est la première à proposer une modélisation stochastique du marché financier. Bien qu’initialement peu reconnue, son œuvre sera redécouverte au XX\textsuperscript{e} siècle, notamment par les économistes et mathématiciens anglo-saxons.
 
 Il est aujourd’hui considéré comme un précurseur de la finance quantitative et un pionnier du mouvement brownien en mathématiques.
 
 \subsection{Objectifs de l'article}
 
-Le présent article propose un résumé d'une lecture active et structurée de la thèse de Bachelier (66 pages). Il vise tout d'abord à présenter les idées clés de la \textit{Théorie de la spéculation} dans un langage accessible aux étudiants de licence. Nous y expliquerons notamment les modèles mathématiques introduits (cours vrai, loi de probabilité, diffusion, etc.) et nous conclurons par la mise en lumière les liens entre les intuitions de Bachelier et les développements ultérieurs en finance moderne.
+Le présent article propose un résumé d'une lecture active de la thèse de Bachelier (66 pages). Il vise tout d'abord à présenter les idées clés de la \textit{Théorie de la spéculation} dans un langage accessible aux étudiants de licence. Nous y expliquerons notamment les modèles mathématiques introduits (cours vrai, loi de probabilité, diffusion, etc.) et nous conclurons par les liens entre les intuitions de Bachelier et les développements ultérieurs en finance moderne.
 
 \subsection{Principales contributions de la thèse}
 
-Dans sa thèse, Bachelier introduit plusieurs concepts fondamentaux. Il modélise dans un premier temps les variations de cours comme un phénomène aléatoire, posant les bases du mouvement brownien avant même Einstein ! Il établit ensuite une loi de probabilité pour les fluctuations de marché, inspirée de la loi normale de Gauss. D'autre part, il formalise des notions toujours utilisées aujourd’hui comme le cours « vrai », les primes, et les options. enfin, il énonce que, dans un marché équilibré, l’espérance mathématique du spéculateur est nulle, anticipant ainsi le \textit{principe d’absence d’arbitrage}.
+Dans sa thèse, Bachelier introduit plusieurs concepts fondamentaux. Il modélise dans un premier temps les variations de cours comme un phénomène aléatoire, posant les bases du mouvement brownien avant même Einstein ! Il établit ensuite une loi de probabilité pour les fluctuations de marché, inspirée de la loi normale de Gauss. D'autre part, il formalise des notions toujours utilisées aujourd’hui comme le cours « vrai », les primes, et les options. Enfin, il énonce que dans un marché équilibré, l’espérance mathématique du spéculateur est nulle, anticipant ainsi le très important \textit{principe d’absence d’arbitrage}.
 
-Ces apports font de sa thèse un texte visionnaire, fondateur de la finance moderne, bien avant l’avènement de modèles comme celui de Black-Scholes.
+Ces apports font de sa thèse un texte visionnaire, fondateur de la finance moderne, bien avant l’avènement de modèles comme celui de Black-Scholes par exemple.
 
 \section{La Bourse et ses mécanismes au XIX\textsuperscript{e} siècle}
 
@@ -91,8 +91,8 @@ Quant aux opérations à prime, elles ressemblent aux options actuelles :
   \item Sa perte est limitée à la prime versée, tandis que son gain est théoriquement illimité.
   \item Le vendeur de prime, à l’inverse, perçoit une prime fixe mais s’expose à une perte potentielle importante.
 \end{itemize}
-C'est typiquement ce que l'on appelle les options d'achat et de vente (call/put).\\
-Bachelier illustre ces opérations par des représentations géométriques (p.~25–26), où l'on peut observer les bénéfices en fonction des cours.
+C'est typiquement ce que l'on appelle aujourd'hui les options d'achat et de vente (call/put).\\
+Bachelier illustre ces opérations par des représentations géométriques (p.~25–26), où l'on peut observer les bénéfices en fonction des cours. Nous détaillerons cela dans la section suivante.
 
 \subsection{Reports, coupons et cours de compensation}
 
@@ -106,18 +106,18 @@ Le \textit{cours de compensation} est le prix de référence utilisé lors de la
 
 \subsection{Cours vrai et cours équivalent}
 
-Bachelier introduit la notion essentielle de \textit{cours vrai}. Selon lui, le cours coté sur le marché n’est pas nécessairement le plus juste. Il propose de corriger ce cours en tenant compte des intérêts liés aux coupons à venir, des effets du report, et de la date de liquidation.
+Louis Bachelier introduit la notion essentielle de \textit{cours vrai}. Selon lui, le cours coté sur le marché n’est pas nécessairement le plus juste. Il propose de corriger ce cours en tenant compte des intérêts liés aux coupons à venir, des effets du report, et de la date de liquidation.
 
 Il définit alors des \textit{cours équivalents} comme des prix futurs attendus, ajustés pour refléter la position dans le mois. Par exemple, une rente de 100 francs avec un coupon attendu fera logiquement monter le cours de 0{,}25 franc par mois.
 
-La \textit{courbe des cours vrais} est présentée comme une droite ou une fonction linéaire entre deux liquidations. Cette courbe est centrale pour déterminer la \textit{valeur actualisée} des positions.
+La \textit{courbe des cours vrais} est présentée comme une fonction linéaire entre deux liquidations. Cette courbe est centrale pour déterminer la \textit{valeur actualisée} des positions.
 
-Enfin, Bachelier insiste sur l'importance de cette correction car elle permet de calculer des espérances mathématiques équitables. C'est la base de son raisonnement probabiliste.
+Enfin, le mathématicien insiste sur l'importance de cette correction car elle permet de calculer des espérances mathématiques équitables. C'est la base de son raisonnement probabiliste.
 
 \bigskip
 
 \noindent
-Ainsi, au terme de cette première partie, nous avons  posé les bases de la thèse de Bachelier. Un marché organisé autour d’opérations structurées, une dynamique temporelle claire, et l’introduction d'un point de vue mathématique du comportement des cours. Dans la suite, le mathématicien novateur utilise ces outils pour bâtir un modèle probabiliste rigoureux de la spéculation.
+Au terme de cette première partie, nous avons  posé les bases de la thèse de Bachelier. Un marché organisé autour d’opérations structurées, une dynamique temporelle claire, et l’introduction d'un point de vue mathématique du comportement des cours. Dans la suite, Bachelier utilise ces outils pour bâtir un modèle probabiliste rigoureux de la spéculation.
 
 \section{Modélisation mathématique des opérations}
 
@@ -137,7 +137,7 @@ Bachelier insiste sur le fait que les marchés à prime permettent de \textit{li
 
 \subsection{Options et stellage}
 
-En complément des opérations simples, Bachelier introduit (p.~31) ce qu’il appelle des \textit{options} (au sens moderne du terme), c’est-à-dire des instruments hybrides entre le ferme et la prime.
+En complément des opérations simples, le mathématicien introduit (p.~31) ce qu’il appelle des \textit{options} (au sens moderne du terme), c’est-à-dire des instruments hybrides entre le ferme et la prime.
 
 Il donne l’exemple d’une \textit{option du double} : une position qui donne droit à deux unités de gain en cas de hausse, mais seulement à une unité de perte en cas de baisse. On parle aujourd’hui d’option asymétrique. De telles structures permettent de moduler le profil de risque selon les anticipations.
 
@@ -151,17 +151,76 @@ Ce montage donne :
 
 Le stellage est donc une \textit{stratégie directionnellement neutre}, qui mise uniquement sur l’ampleur des mouvements, et non leur sens.
 
+\begin{center}
+    \includegraphics[width=0.5\textwidth]{strad.png}
+\end{center}
+
 \bigskip
 
 \noindent
-Au terme de cette seconde partie, nous avons compris que cette modélisation des opérations financières est l’un des apports pédagogiques majeurs de Bachelier. Elle permet de visualiser les profils de gains et pertes associés à chaque type d’opération, et prépare le terrain à une analyse probabiliste des stratégies, développée dans les sections suivantes.
-
-test
+Au terme de cette seconde partie, nous avons compris que cette modélisation des opérations financières est l’un des apports majeurs de Bachelier. Elle permet de visualiser les profils de gains et pertes associés à chaque type d’opération, et prépare le terrain à une analyse probabiliste des stratégies, développée dans les sections suivantes.
 
 \section{Probabilités dans les opérations financières}
+
 \subsection{Probabilités mathématiques et spéculatives}
+
+Le mathématicien précurseur distingue deux types de probabilités dans le contexte des opérations financières :
+
+\begin{itemize}
+    \item Les \textit{probabilités mathématiques} sont déterminées \textit{a priori}, sur la base d’hypothèses de symétrie ou de lois connues. Elles sont typiques des jeux de hasard et permettent une modélisation probabiliste rigoureuse.
+
+    \item Les \textit{probabilités spéculatives}, quant à elles, traduisent les anticipations subjectives des agents économiques sur l’évolution future des cours. Ces probabilités sont liées à des jugements personnels basés sur des facteurs économiques, politiques ou psychologiques.
+\end{itemize}
+
+Bien que les variations des cours soient imprévisibles, on peut à un instant donné leur associer une \textit{loi de probabilité} décrivant l’état statistique du marché. Dans sa thèse, Bachelier postule que le marché dans son ensemble est \textit{neutre} : il n’anticipe ni la hausse ni la baisse. Cela se traduit mathématiquement par la symétrie de la loi de probabilité autour d’un \textit{cours vrai}.
+
+Ainsi, on peut écrire que la densité de probabilité $p(x)$ représentant la probabilité que le cours relatif soit égal à $x$ (c’est-à-dire l’écart entre le cours effectif et le cours vrai) satisfait :
+\[
+p(x) = p(-x)
+\]
+
+On verra dans la section suivante que cette loi est modélisée par une densité normale centrée, solution de l'équation de la chaleur.\\
+
 \subsection{Espérance mathématique et équité du marché}
+
+L’espérance mathématique joue un rôle fondamental dans l’évaluation des jeux de hasard et des opérations financières. Elle est définie comme le produit du gain possible par la probabilité de ce gain. Un jeu est dit \textit{équitable} lorsque son espérance est nulle.
+
+\begin{center}
+    \og L’espérance mathématique du spéculateur est nulle. \fg\ p. 34
+\end{center}
+
+Ce principe de neutralité permet de garantir que, selon la loi de probabilité admise par le marché à un instant donné, aucune opération n’offre un avantage certain. Ainsi, même une stratégie conditionnelle -- par exemple, vendre dès que le cours dépasse un certain seuil -- a une espérance nulle au regard du marché.
+
+Bachelier propose également une modélisation quantitative de cette idée : la fonction de densité de probabilité $p(x,t)$, représentant la probabilité que le cours atteigne une valeur $x$ au temps $t$, est donnée par la loi normale centrée réduite :
+\[
+p(x,t) = \frac{1}{\sqrt{4\pi t}} \exp\left(-\frac{x^2}{4t}\right)
+\]
+où $t$ désigne le temps écoulé depuis un instant initial, et $x$ l’écart au cours vrai. Cette loi satisfait l’équation de diffusion :
+
+\[
+\frac{\partial p}{\partial t} = \frac{1}{2} \frac{\partial^2 p}{\partial x^2}
+\]
+
+Ce formalisme permet de passer d’un raisonnement spéculatif subjectif à une modélisation mathématique des fluctuations boursières. Même si chaque agent agit sur la base de croyances individuelles, le comportement global du marché peut être décrit par une loi de probabilité objective et continue.
+
+\noindent
+\textbf{Longue remarque : } il peut sembler paradoxal, voire absurde, de modéliser par des outils mathématiques ce qui relève des croyances subjectives de chaque agent économique. En effet, chaque spéculateur agit en fonction d'informations incomplètes, de jugements personnels et d’intuitions, si bien que prévoir l’avenir des cours semble hors de portée du calcul. C'est aussi une réflexion que je me suis faite. Cependant, la puissance de ces outils mathématiques ne réside pas dans la prédiction d’un cours futur déterminé, mais dans la description statistique du \textit{comportement global} du marché. De la même manière qu'en physique statistique on modélise l’agitation thermique de milliards de particules sans connaître leurs trajectoires individuelles, on peut modéliser l'ensemble des anticipations des agents comme un phénomène aléatoire régulier. On utilise d'ailleurs une équation venant de la physique, celle de la chaleur ! Cette régularité émerge lorsque l’on considère non pas un agent isolé, mais une population d’agents ayant des opinions divergentes qui s’équilibrent en moyenne. C’est ce principe qui justifie l’usage d’une densité de probabilité centrée sur un cours ``neutre'' (le cours vrai), et qui donne sens à une approche probabiliste des marchés.
+
 \subsection{Avantage mathématique}
+
+Bachelier introduit l’idée d’\textit{avantage mathématique} pour quantifier la valeur d’un jeu, même lorsque celui-ci n’est pas équitable. Il définit cet avantage comme le rapport entre l’espérance positive et la somme des espérances positive et négative :
+\[
+\text{Avantage mathématique} = \frac{\text{espérance positive}}{\text{espérance positive} + \text{espérance négative}}
+\]
+
+Cette notion complète celle d’espérance mathématique en évaluant l’asymétrie du jeu : un jeu équitable a un avantage de 1/2, tandis qu’un jeu déséquilibré voit son avantage se rapprocher de 0 ou de 1 selon le sens du déséquilibre.
+
+Enfin, le mathématicien illustre l’égalité des espérances au moyen d’un raisonnement fondé sur les \textit{cours vrais}, qui corrigent les biais liés aux coupons ou aux reports. Par exemple :
+\begin{quote}
+    \og Les espérances mathématiques de l’acheteur et du vendeur sont nulles quand le report est de 2\% ; [...] si l’on considère ces cours vrais, on peut dire que les espérances mathématiques [...] sont nulles. \fg\ (p. 34)
+\end{quote}
+
+Cela justifie, mathématiquement, l’hypothèse de neutralité du marché : même les stratégies fondées sur des options ou des primes sont équitables si on les évalue correctement.
 
 \section{La dynamique des cours}
 \subsection{Loi de probabilité des cours}
