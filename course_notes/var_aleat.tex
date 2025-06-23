@@ -1,0 +1,97 @@
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath, amssymb}
+\usepackage{tcolorbox}
+\usepackage{geometry}
+\geometry{margin=2.5cm}
+
+\usepackage{titling}
+\renewcommand\maketitlehooka{\null\mbox{}\vfill}
+\renewcommand\maketitlehookd{\vfill\null}
+
+\title{\Huge{\textbf{Une introduction aux variables aléatoires}}\\ \medskip
+      \Huge{\textit{Résumé}}\vspace*{0.7cm}}
+\author{\LARGE{Alexis VO}\vspace{1cm}\\ \medskip
+      Université Paris-Saclay\\École polytechnique}
+\date{\vspace{0.2cm}\today}
+
+\begin{document}
+
+\maketitle
+\newpage
+
+\section{Qu'est-ce qu'une variable aléatoire ?}
+
+Une \textbf{variable aléatoire} (abrégée VA) est une façon de modéliser une expérience aléatoire à l’aide d’une valeur numérique. Elle associe à chaque issue possible d’une expérience un nombre réel.
+
+\begin{tcolorbox}[colback=green!5!white, colframe=green!50!black, title=Exemple (discret)]
+Lancer un dé à 6 faces : on peut modéliser le résultat par une variable aléatoire \( X \) telle que \( X \in \{1,2,3,4,5,6\} \)
+\end{tcolorbox}
+
+Il existe deux grandes familles de variables aléatoires : \textbf{discrètes et continues}.
+
+\section*{2. Variable aléatoire discrète}
+
+Une VA discrète prend un nombre \textbf{fini ou dénombrable} de valeurs. Elle est définie par une \textbf{loi de probabilité} qui associe une probabilité à chaque valeur.
+
+\[
+\boxed{
+\mathbb{P}(X = x_i)
+\quad \text{avec} \quad \sum_i \mathbb{P}(X = x_i) = 1
+}
+\]
+
+\section{Variable aléatoire continue}
+
+Une VA continue peut prendre \textbf{toutes les valeurs} dans un intervalle de réels (par exemple \( [0, +\infty[ \), ou \( \mathbb{R} \)).
+
+\begin{tcolorbox}[colback=red!5!white, colframe=red!50!black, title=Définition]
+Une variable aléatoire \( X \) est \textbf{continue} s’il existe une fonction \( p(x) \), appelée \textit{densité de probabilité}, telle que pour tout intervalle \( [a,b] \) :
+\[
+\boxed{
+\mathbb{P}(a \leq X \leq b) = \int_a^b p(x)\, dx
+}
+\]
+\center et
+\[
+\boxed{
+\int_{-\infty}^{+\infty} p(x)\, dx = 1
+}
+\]
+\end{tcolorbox}
+
+\subsection*{Remarques :}
+\begin{itemize}
+    \item Contrairement au cas discret, on n’a jamais \( \mathbb{P}(X = x) > 0 \). Pour toute valeur précise, \( \mathbb{P}(X = x) = 0 \).
+    \item Ce qui est probable, ce n’est pas une valeur exacte, mais un \textbf{intervalle}.
+\end{itemize}
+
+\section*{4. Exemple classique : la loi normale}
+
+La densité de la loi normale centrée réduite est :
+
+\[
+\boxed{
+p(x) = \frac{1}{\sqrt{2\pi}} \exp\left(-\frac{x^2}{2}\right)
+}
+\]
+
+\begin{itemize}
+    \item Elle est symétrique par rapport à 0.
+    \item Elle est très utilisée pour modéliser des phénomènes naturels, physiques ou économiques (par exemple les fluctuations boursières chez Bachelier).
+\end{itemize}
+
+\section*{5. Résumé}
+
+\begin{tcolorbox}[colback=yellow!5!white, colframe=yellow!60!black, title=Résumé]
+Une variable aléatoire continue :
+\begin{itemize}
+    \item prend ses valeurs dans un intervalle de réels ;
+    \item est modélisée par une \textbf{densité de probabilité} \( p(x) \) ;
+    \item permet de calculer les probabilités via une \textbf{intégrale} ;
+    \item vérifie toujours \( \mathbb{P}(X = x) = 0 \) pour toute valeur fixe \( x \).
+\end{itemize}
+\end{tcolorbox}
+
+\end{document}
