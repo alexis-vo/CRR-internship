@@ -380,7 +380,7 @@ Au terme de cette troisième partie, nous avons vu comment Bachelier fonde la sp
 
 Après avoir posé les fondements probabilistes de la spéculation, Bachelier propose de modéliser \textit{l’évolution temporelle des cours} à l’aide d’une loi de probabilité dépendant du temps. Cette approche marque le passage d’une vision statique des gains attendus à une \textit{description dynamique des fluctuations de marché}.
 
-\section{La dynamique des cours} % DEVELOPPER LA PARTIE 5 ET L'ILLUSTRER PAR UN EXEMPLE CLAIR PUIS CONTINUER DE FINIR LE DOC.
+\section{La dynamique des cours}
 
 \subsection{Loi de probabilité dynamique des cours}
 
@@ -392,21 +392,25 @@ Cette fonction dépend à la fois de la variable \( x \) et du temps \( t \), et
 p(x,t) = p(-x,t).
 \]
 
-Le but est alors de déterminer comment cette densité évolue dans le temps, c’est-à-dire comment se comporte $p(x,t)$ lorsque $t$ varie. Pour cela, Bachelier introduit une approche inspirée des méthodes de la physique mathématique.
+Le but est alors de déterminer comment cette densité évolue dans le temps, c’est-à-dire comment se comporte $p(x,t)$ lorsque $t$ varie. Pour cela, Bachelier introduit une approche inspirée des méthodes de la physique.
 
-\subsection{Équation de diffusion (équation de Fourier)}
+\subsection{Équation de diffusion, de chaleur, de Fourier}
 
-En raisonnant sur la diffusion progressive de la probabilité autour du cours initial, Bachelier établit que la densité $p(x,t)$ doit satisfaire une équation aux dérivées partielles analogue à l’équation de la chaleur (ou équation de diffusion) en physique :
+En raisonnant sur la diffusion progressive de la probabilité autour du cours initial, Bachelier établit que la densité $p(x,t)$ doit satisfaire une équation aux dérivées partielles analogue à l’équation de la chaleur :
 
 \[
 \frac{\partial p}{\partial t} = \frac{1}{2} \frac{\partial^2 p}{\partial x^2}
 \]
 
-ce qui exprime mathématiquement la manière dont la distribution des cours se diffuse et s’étale dans le temps.
+\noindent ce qui exprime mathématiquement la manière dont la distribution des cours se diffuse et s’étale dans le temps.
 
-\textit{
-La justification mathématique de cette équation repose sur l’hypothèse que les variations du cours sont le résultat de l’accumulation d’une infinité de petits chocs aléatoires. Le passage à la limite de ce processus conduit à une équation de diffusion, comme dans les mouvements browniens.
-}
+\medskip 
+
+\noindent \textbf{Remarque : } \textit{ cette équation repose sur l’hypothèse que les variations du cours sont le résultat de l’accumulation d’une infinité de petits chocs aléatoires. Le passage à la limite de ce processus conduit à une équation de diffusion, comme dans les mouvements browniens dont voici une illustration :}
+
+\begin{center}
+  \includegraphics[width=0.6\textwidth]{brownian_motion.png}
+\end{center}
 
 \subsection{Solution gaussienne}
 
@@ -414,368 +418,245 @@ La solution fondamentale de cette équation, sous l’hypothèse que le cours es
 \[
 p(x,t) = \frac{1}{\sqrt{4\pi t}} \exp\left(-\frac{x^2}{4t}\right)
 \]
+et dont la très connue représentation graphique est une cloche centrée sur la moyenne :
+
+\begin{center}
+  \includegraphics[width=0.6\textwidth]{gaussian_curve.png}
+\end{center}
+
 Cette densité garde la propriété de symétrie et montre que l’incertitude sur le cours augmente avec le temps, car l’écart-type est proportionnel à \(\sqrt{t}\).
 
 Cette fonction satisfait les conditions suivantes :
 \begin{itemize}
-    \item Elle est symétrique : $p(x,t) = p(-x,t)$ ;
-    \item Elle est normalisée : $\int_{-\infty}^{\infty} p(x,t)\, dx = 1$ ;
-    \item Elle s’élargit avec le temps : la probabilité se diffuse vers les grandes valeurs de $|x|$ ;
-    \item Elle tend vers la densité uniforme nulle à l’infini.
+    \item symétrie : $p(x,t) = p(-x,t)$ ;
+    \item normalisée : $\int_{-\infty}^{\infty} p(x,t)\, dx = 1$ ;
+    \item élargissement avec le temps : la probabilité se diffuse vers les grandes valeurs de $|x|$ ;
+    \item tend vers la densité uniforme nulle à l’infini.
 \end{itemize}
 
 Cette loi décrit donc la probabilité que le cours ait atteint la valeur $x$ au temps $t$, en supposant qu’il était exactement nul au temps $t = 0$.
 
-Ce formalisme permet de passer d’un raisonnement spéculatif subjectif à une modélisation mathématique rigoureuse des fluctuations boursières. Bien que chaque agent agisse sur la base de ses propres croyances, le comportement global du marché peut être décrit par une loi de probabilité objective et évolutive dans le temps.
+\subsection{Illustrons cela par un exemple}
+
+Rappelons que la densité de probabilité \( p(x,t) \) à un instant \( t \) est donnée par :
+
+\[
+p(x,t) = \frac{1}{\sqrt{2\pi t}} \exp\left(-\frac{x^2}{2t}\right).
+\]
+
+Voici quelques valeurs calculées pour différents \( t \) et \( x \) :
+
+\begin{center}
+\begin{tabular}{c|cccc}
+\hline
+\( t \) & \( p(0,t) \) & \( p(1,t) \) & \( p(2,t) \) & \( p(4,t) \) \\
+\hline
+1 & 0.399 & 0.242 & 0.054 & 0.0003 \\
+4 & 0.199 & 0.176 & 0.121 & 0.021 \\
+9 & 0.133 & 0.129 & 0.098 & 0.053 \\
+\hline
+\end{tabular}
+\end{center}
+
+On constate plusieurs points :
+\begin{itemize}
+  \item À court terme (\( t=1 \)), la densité est très concentrée autour de zéro, ce qui signifie que le cours effectif est très probablement proche du cours vrai — les fluctuations sont faibles.
+  \item Avec l’augmentation du temps (\( t=4 ou t=9 \)), la densité s’étale, ce qui traduit une incertitude croissante : il devient plus probable que le cours effectif s’écarte significativement du cours vrai.
+  \item Cette diffusion progressive modélise la volatilité naturelle des marchés, où l’écart-type (incertitude) augmente comme \(\sqrt{t}\). Par exemple, la probabilité que l’écart dépasse une valeur élevée (comme 4) est quasi nulle à \( t=1 \), mais devient notable à \( t=4 \) ou \( t=9 \), reflétant le risque croissant sur des horizons plus longs.
+\end{itemize}
 
 \subsection{Écart-type et espérance en fonction du temps}
 
-L’espérance mathématique du cours est donnée par :
+Soit \( X_t \) une variable aléatoire réelle modélisant l’écart entre le cours effectif d’un actif et son cours « vrai » à l’instant \( t \). D’après la modélisation proposée par Bachelier, cette variable suit une loi normale centrée de variance \( 2t \), dont la densité de probabilité est :
+
+\[
+p(x,t) = \frac{1}{\sqrt{4\pi t}} \exp\left(-\frac{x^2}{4t}\right)
+\]
+
+Cette densité est symétrique par rapport à zéro, ce qui implique que l’espérance mathématique est nulle à tout instant :
+
 \[
 \mathbb{E}[X_t] = \int_{-\infty}^{\infty} x\, p(x,t)\, dx = 0
 \]
-du fait de la symétrie de la densité.
 
-En revanche, la variance est donnée par :
+En revanche, la variance de \( X_t \) croît linéairement avec le temps :
+
 \[
 \mathbb{V}[X_t] = \int_{-\infty}^{\infty} x^2\, p(x,t)\, dx = 2t
 \]
-d’où un écart-type :
+
+On en déduit que l’écart-type associé à ces fluctuations est :
+
 \[
-\sigma(t) = \sqrt{2t}
+\sigma(t) = \sqrt{\mathbb{V}[X_t]} = \sqrt{2t}
 \]
 
-Cela signifie que les fluctuations typiques du cours croissent comme la racine carrée du temps, phénomène caractéristique des processus de diffusion :
+Cela signifie que les fluctuations typiques du cours croissent comme la racine carrée du temps, ce qui est une caractéristique fondamentale des processus de diffusion. Ainsi, plus on s’éloigne de l’instant initial, plus l’incertitude sur la valeur du cours effectif augmente. On peut donc résumer cette dynamique probabiliste par :
+
 \[
-X_t \sim \mathcal{N}(0, 2t)
+X_t \sim \mathcal{N}(0,\, 2t)
 \]
 
-\textit{
-Ce comportement $\sigma(t) \propto \sqrt{t}$ justifie a posteriori pourquoi la valeur d’une prime (option asymétrique) ou l’« écart probable » autour du cours central sont tous proportionnels à $\sqrt{t}$. Le modèle de Bachelier est donc cohérent avec la croissance sublinéaire de l’incertitude dans le temps.
-}
+où \( \mathcal{N}(0, 2t) \) désigne la loi normale de moyenne nulle et de variance \( 2t \). Cette modélisation rend compte de l’aléa inhérent aux marchés, tout en permettant une description quantitative précise de l’évolution des cours.
 
-Au terme de cette quatrième partie, ...
+Cette approximation par la loi normale est issue du \textit{théorème central limite} que nous ne détaillerons pas ici (il a été détaillé dans un autre papier). Si l’on suppose que les variations infinitésimales du cours à chaque instant sont indépendantes, de faible amplitude, et symétriques, alors la somme de ces petites variations sur un intervalle de temps \( t \) tend vers une loi normale lorsque le nombre de pas devient très grand. Ce raisonnement est une approximation naturelle de nombreux phénomènes aléatoires dans lesquels aucune direction n’est privilégiée.
+
+En d’autres termes, si l’on modélise l’évolution du cours par un processus aléatoire à pas discrets, la variable aléatoire \( X_t \), représentant l’écart cumulé au cours vrai après un grand nombre d’interactions de marché, suit approximativement une loi gaussienne. C’est cette limite continue que Bachelier formalise dans sa thèse, en posant directement que \( X_t \sim \mathcal{N}(0, 2t) \), dont la densité satisfait l’équation de diffusion.
+
+\bigskip
+
 C’est dans ce cadre qu’intervient l’analogie avec la \textit{diffusion thermique}, et que se précise l’idée d’un mouvement aléatoire continu du cours, que Bachelier anticipe sous la forme d’un processus que l’on nommera plus tard \textit{mouvement brownien}.
 
 
-\section{Applications aux options et primes}
+\section{Applications aux options et primes} % TODO Finir ce papier + faire un papier sur le théorème central limite, la loi gausienne et loi normale (approximation etc) + entourer les grosses formules par \boxed{}
 
 \subsection{Prime simple : calcul et probabilité de réussite}
 
-Une \textit{prime simple} (ou option européenne d'achat ou de vente, selon le sens) permet à son détenteur de bénéficier des gains d'une position ferme au-delà d’un certain seuil, tout en limitant ses pertes à un montant initialement payé, appelé la \textbf{prime}. Bachelier considère l'achat d'une prime à la hausse, de montant $a$, et centrée autour du \textit{cours vrai}, ce qui signifie que l’option s’exerce si le cours dépasse $a$.
+Une \textit{prime simple} -- ou bien une option européenne d'achat ou de vente -- permet à son détenteur de profiter d’un gain conditionnel à la réalisation d’un scénario favorable, tout en limitant ses pertes au montant initialement payé, appelé la \textit{prime}. 
 
-L’espérance mathématique du preneur de prime est alors donnée par :
+Bachelier modélise l'achat d'une prime à la hausse, de seuil \( a > 0 \), qui donne un gain égal à \( x - a \) lorsque le cours effectif \( x \) dépasse ce seuil, et nul sinon. Le cours est ici centré autour du \textit{cours vrai}, de sorte que la densité \( p(x,t) \) est symétrique et centrée sur zéro.
+
+\paragraph{Espérance mathématique du gain.}
+
+La valeur attendue du gain pour l’acheteur de la prime est donnée par l'intégrale :
+
 \[
 \mathbb{E}[\text{gain}] = \int_a^{\infty} (x - a)\, p(x,t)\, dx
 \]
 
-Mais selon le \textbf{principe d'équité du marché}, cette espérance doit être nulle si la prime est correctement valorisée :
+Mais selon le \textit{principe d’équité du marché}, cette espérance doit être nulle si la prime est justement valorisée. En effet, si le détenteur de la prime a une espérance de gain non nulle, cela signifie qu’un arbitrage est possible, ce qui contredit l'hypothèse de neutralité du marché. Cela revient à imposer :
+
 \[
-\int_{-\infty}^{\infty} \text{gain}(x)\, p(x,t)\, dx = 0
-\]
-Autrement dit, le montant de la prime $a$ est exactement égal à l’espérance positive d’un achat ferme, c’est-à-dire :
-\[
-a = \int_0^{\infty} x\, p(x,t)\, dx
+\mathbb{E}[\text{gain}] - a = 0 \quad \Rightarrow \quad a = \int_0^{\infty} x\, p(x,t)\, dx
 \]
 
-De plus, Bachelier démontre que la \textbf{probabilité de succès} d’une prime simple (i.e., que le cours final dépasse le seuil $a$) est constante et indépendante du temps :
+Autrement dit, le montant de la prime est exactement égal à l’espérance positive d’un achat ferme : c’est la moyenne des gains potentiels, pondérés par la probabilité qu’ils se réalisent. Cela établit un lien direct entre le prix de l’option et l’intégrale de la partie positive de la densité.
+
+\paragraph{Probabilité de succès.}
+
+Bachelier calcule également la \textit{probabilité de succès} d’une prime simple, c’est-à-dire la probabilité que le cours effectif dépasse le seuil \( a \), ce qui permet à l’option de s’exercer. Il montre que cette probabilité est constante et indépendante du temps :
+
 \[
 \mathbb{P}(X_t > a) = \int_a^{\infty} p(x,t)\, dx = 0{,}345
 \]
-Cette valeur découle du calcul intégral explicite de l'aire sous la densité gaussienne au-delà d’un écart-type.
+
+Ce résultat découle du fait que la densité \( p(x,t) \) est une gaussienne \( \mathcal{N}(0, 2t) \), et que \( a \) est fixé de sorte que :
+
+\[
+\int_0^{\infty} x\, p(x,t)\, dx = a
+\]
+
+Le seuil \( a \) correspond à une fraction fixe de l'écart-type \( \sqrt{2t} \), ce qui implique que la probabilité d’atteinte du seuil reste constante quelle que soit l’échelle de temps. Cela reflète l’idée fondamentale que le marché « ajuste » la prime en fonction de l’horizon temporel, de sorte que l’équité soit préservée.
+
+\paragraph{Interprétation.}
+
+Ce modèle permet de fixer un prix juste à une option dans un marché symétrique, sans biais directionnel. Même si la probabilité de gain est inférieure à 50\% (ici 34,5\%), le montant du gain potentiel compense cette asymétrie, rendant le jeu équitable.
 
 \subsection{Écart probable et valeur attendue}
 
-L’\textit{écart probable} est défini comme la valeur $a$ telle que le cours ait une chance sur deux de s’écarter de plus de $a$ en valeur absolue à l’échéance. Mathématiquement, il vérifie :
+L’\textit{écart probable} est défini comme la valeur seuil \( a \) telle que le cours ait une chance sur deux de s’en écarter en valeur absolue à l’échéance. Autrement dit, il s’agit de la borne symétrique autour du cours moyen (ici centré en 0) qui capture 50\,\% de la probabilité :
+
 \[
 \mathbb{P}(|X_t| < a) = 0{,}5
 \]
 
-Sachant que la densité est gaussienne de variance $2t$, cet écart s’écrit :
+Puisque \( X_t \sim \mathcal{N}(0, 2t) \), la densité est symétrique et la distribution des écarts suit une gaussienne centrée. On peut donc exprimer \( a \) sous la forme :
+
 \[
 a = \lambda \sqrt{2t}, \quad \text{où } \lambda \approx 0{,}674
 \]
 
-Dans le cas d’une prime simple de valeur $a$, la \textbf{valeur attendue positive} pour l’acheteur est (p. 53) :
+Cette constante \( \lambda \) correspond à la médiane de la loi normale centrée réduite en valeur absolue : 50\,\% des réalisations sont alors comprises entre \( -a \) et \( +a \). L’écart probable est ainsi un indicateur de dispersion plus robuste que l’écart-type, car il se fonde sur la médiane et non sur la moyenne quadratique.
+
+Dans le cas d’une prime simple de valeur \( a \), Bachelier calcule que la \textit{valeur moyenne des gains} lorsque le seuil est franchi (c’est-à-dire l’espérance conditionnelle positive) vaut :
+
 \[
-\mathbb{E}_+(x > a)[x - a] = 0{,}58 \cdot a
+\mathbb{E}_+(X_t > a)[X_t - a] = 0{,}58 \cdot a
 \]
-et donc le prix de la prime correspond à l’espérance positive d’une position ferme, ce qui illustre encore le principe d’équité du marché.
+
+Ainsi, le prix de la prime peut être vu comme le résultat d’un calcul d’espérance, pondéré uniquement sur les scénarios favorables, ce qui reflète à nouveau le principe d’équité du marché : le coût d’une stratégie risquée est exactement égal à la valeur attendue de ses gains.
 
 \subsection{Double prime et loi des écarts}
 
-Une \textit{double prime} (ou \textit{stellage}) combine une prime à la hausse et une prime à la baisse. Le preneur paie deux primes de valeur $a$ et ne gagne que si le cours final s’écarte significativement (vers le haut ou vers le bas). Cette stratégie est neutre vis-à-vis de la direction du marché mais sensible à la \textbf{volatilité}.
+Détaillons ce que nous avions énoncé dans la partie \textbf{3.2 Options et stellage}... Nous avions vu que la \textit{double prime} (ou \textit{stellage}) combine une prime à la hausse et une prime à la baisse. Le preneur paie deux primes de valeur $a$ et ne gagne que si le cours final s’écarte significativement (vers le haut ou vers le bas). Cette stratégie est neutre vis-à-vis de la direction du marché mais sensible à la \textit{volatilité}.
 
 Sa valeur correspond à la somme des deux espérances positives de chaque prime :
 \[
 \text{Valeur du stellage} = 2a = \int_{-\infty}^{-a} (-x - a)\, p(x)\, dx + \int_a^{\infty} (x - a)\, p(x)\, dx
 \]
 
-Bachelier montre que si le marché sous-évalue l’écart entre les primes et le cours ferme, il est possible de combiner plusieurs options de manière à construire une stratégie \textbf{arithmétiquement gagnante} (p. 30). Il donne ainsi l’exemple d’un arbitrage entre différentes primes si la loi des écarts n’est pas respectée.
+Bachelier montre que si le marché sous-évalue l’écart entre les primes et le cours ferme, il est possible de combiner plusieurs options de manière à construire une stratégie \textit{arithmétiquement gagnante} (p. 30). Il donne ainsi l’exemple d’un arbitrage entre différentes primes si la loi des écarts n’est pas respectée.
+
+\subsection{Comprendre cette stratégie de \textit{straddle} par un exemple...}
+
+Supposons que :
+\begin{itemize}
+    \item le cours vrai est de \( 100\,euros \),
+    \item les primes à la hausse et à la baisse ont un seuil de \( 5\,euros \) autour du cours vrai : seuils \( 95\,euros \) et \( 105\,euros \),
+    \item chaque prime coûte \( 2\,euros \),
+    \item le coût total du straddle est donc \( 4\,euros \).
+\end{itemize}
+
+À l’échéance, les gains dépendent du cours effectif :
+
+\begin{center}
+\begin{tabular}{c|c|c|c|c}
+\hline
+Cours final & Gain call & Gain put & Gain total & Gain net \\
+\hline
+100\,€ & 0 & 0 & 0 & -4\,€ \\
+106\,€ & 1 & 0 & 1 & -3\,€ \\
+120\,€ & 15 & 0 & 15 & \textbf{+11\,€} \\
+94\,€ & 0 & 1 & 1 & -3\,€ \\
+80\,€ & 0 & 15 & 15 & \textbf{+11\,€} \\
+\hline
+\end{tabular}
+\end{center}
+
+\paragraph{Interprétation.}
+
+Lorsque le marché reste stable autour du cours vrai, les deux primes expirent sans valeur, et l’acheteur du straddle perd l’intégralité de la prime payée. En revanche, si le cours fluctue fortement dans un sens ou dans l’autre, l’une des deux options devient rentable et permet de compenser (et même dépasser) le coût initial. Le straddle est donc une stratégie \textit{neutre directionnellement}, mais \textit{sensible à la volatilité}.
 
 \subsection{Formule intégrale et interprétations}
 
-L’évaluation des primes repose sur le calcul d’intégrales de la forme :
+L’évaluation des \textit{primes} repose sur des intégrales qui expriment des quantités économiques de manière mathématique. Deux intégrales fondamentales apparaissent dans la thèse de Bachelier :
+
 \[
 \int_a^{\infty} (x - a)\, p(x,t)\, dx
 \quad \text{et} \quad
 \int_a^{\infty} p(x,t)\, dx
 \]
-qui représentent respectivement :
+
+Elles représentent respectivement :
 \begin{itemize}
-    \item la valeur attendue pour l’acheteur d’une prime (gain conditionnel) ;
-    \item la probabilité de succès de la prime.
+    \item la \textbf{valeur attendue} du gain pour un acheteur de prime, c’est-à-dire le gain moyen lorsqu’il y a exercice de l’option (lorsque le cours dépasse le seuil \( a \)) ;
+    \item la \textbf{probabilité de succès}, c’est-à-dire la probabilité que le cours effectif dépasse le seuil d’exercice \( a \).
 \end{itemize}
 
-Bachelier établit également que, si l’on note $a(t)$ la prime simple équitable au temps $t$, alors :
+Ces intégrales reposent sur la densité de probabilité \( p(x,t) \), qui, dans le modèle de Bachelier, est une loi normale centrée de variance \( 2t \). Autrement dit, \( p(x,t) \) décrit la manière dont les cours peuvent s’écarter du cours « vrai » au temps \( t \), avec une probabilité plus forte autour de zéro, et plus faible aux extrémités.
+
+\paragraph{Croissance dans le temps.}
+
+Bachelier démontre que le montant d’une prime simple équitable, que l’on note \( a(t) \), dépend du temps de manière proportionnelle à la racine carrée du temps :
+
 \[
 a(t) \propto \sqrt{t}
 \]
-ce qui reflète directement la croissance de l’écart-type du mouvement brownien.
 
-\textit{
-Ces formules fondent le premier modèle d’option européen de l’histoire, bien avant Black-Scholes (1973). Dans le modèle de Bachelier, les cours suivent un processus gaussien additif (modèle additif de variance croissante), ce qui implique une distribution normale des rendements. Le modèle moderne suppose un mouvement brownien géométrique, mais repose sur la même intuition d’une valorisation équitable par espérance.
-}
+Le symbole \( \propto \) signifie \og est proportionnel à \fg, c’est-à-dire qu’il existe une constante \( k \) telle que :
+
+\[
+a(t) = k \cdot \sqrt{t}
+\]
+
+Cela reflète le fait que plus le temps passe, plus l’incertitude sur l’évolution du cours augmente, ce qui accroît la valeur des options. En effet, dans le cadre d’un mouvement brownien, l’écart-type croît comme \( \sqrt{t} \), ce qui élargit la zone dans laquelle le cours peut s’écarter, augmentant la valeur potentielle d’une option.
+
+\bigskip
+
+Ces formules constituent les premières tentatives rigoureuses de valorisation d'options, bien avant le célèbre modèle de Black-Scholes (1973). Dans le modèle de Bachelier, les cours suivent un processus gaussien \textit{additif} : les variations s'ajoutent au cours de façon aléatoire avec une variance croissante. Cela conduit à une distribution normale des variations de prix.
+Le modèle moderne de Black-Scholes lui suppose un mouvement brownien \textit{géométrique} où les rendements sont aléatoires, pas les prix eux-mêmes, mais repose sur une intuition similaire : le \textit{prix d'une option équitable} est donné par la \textit{valeur espérée de ses gains}, en tenant compte de la probabilité de succès.
+
 
 \section{Vision moderne du modèle de Bachelier}
-
-\subsection{Comparaison avec le modèle de Black-Scholes}
-
-Le modèle de Bachelier repose sur l’hypothèse que le cours $S_t$ évolue selon un processus gaussien additif :
-\[
-S_t = S_0 + \sigma B_t
-\]
-où $B_t$ est un mouvement brownien standard, et $\sigma$ un paramètre de volatilité. Ainsi, les variations absolues de prix $S_t - S_0$ suivent une loi normale $\mathcal{N}(0, \sigma^2 t)$.
-
-À l’inverse, le modèle de Black-Scholes (1973) suppose que ce sont les \textit{rendements relatifs} qui suivent un mouvement brownien. Le prix $S_t$ évolue selon une dynamique multiplicative :
-\[
-dS_t = \mu S_t\, dt + \sigma S_t\, dW_t
-\]
-ou bien, en solution intégrée :
-\[
-S_t = S_0 \exp\left( \left(\mu - \frac{\sigma^2}{2} \right)t + \sigma W_t \right)
-\]
-où $W_t$ est un mouvement brownien, $\mu$ le taux de croissance moyen, et $\sigma$ la volatilité relative. Ainsi, $\log(S_t)$ suit une loi normale.
-
-\begin{itemize}
-    \item Dans le modèle de Bachelier, les prix peuvent devenir négatifs.
-    \item Dans le modèle de Black-Scholes, $S_t > 0$ presque sûrement, ce qui est plus réaliste pour des actifs financiers.
-    \item Le modèle de Bachelier est additif : $S_t$ évolue linéairement en $\sigma \sqrt{t}$.
-    \item Le modèle de Black-Scholes est multiplicatif : $S_t$ évolue exponentiellement.
-\end{itemize}
-
-Cependant, à très court terme ou pour des actifs faiblement volatils (ex. taux d'intérêt proches de zéro), les deux modèles sont proches et Bachelier fournit une bonne approximation.
-
-\subsection{Limites du modèle de Bachelier}
-
-Le modèle de Bachelier présente plusieurs limites notables :
-
-\begin{enumerate}
-    \item \textbf{Possibilité de cours négatifs.} L’additivité du processus implique que la distribution des prix $S_t$ est normale, donc non nulle sur $\mathbb{R}$. Ceci est irréaliste pour des actions ou des options standards, dont le prix ne peut devenir négatif.
-
-    \item \textbf{Absence de martingalisation sous la mesure risque-neutre.} Le modèle de Bachelier ne se prête pas directement à une interprétation en termes de neutralité au risque dans un cadre d’arbitrage. L’absence d’un taux d’intérêt constant ou d’une probabilité risque-neutre explicite limite les méthodes modernes de couverture.
-
-    \item \textbf{Inadéquation aux produits fortement convexes.} Pour les options loin du cours actuel, la distribution gaussienne est inappropriée : elle sous-estime les probabilités de queue, ce qui rend les primes de telles options mal évaluées.
-
-    \item \textbf{Pas de volatilité implicite.} Le modèle ne relie pas naturellement la volatilité observée dans le marché des options à une structure de prix sous-jacente comme dans Black-Scholes.
-\end{enumerate}
-
-\subsection{Malentendus et critiques}
-
-Malgré ses limites, le modèle de Bachelier a souvent été injustement sous-estimé. Plusieurs malentendus ont freiné sa reconnaissance :
-
-\begin{itemize}
-    \item \textbf{Confusion entre prédiction et modélisation probabiliste.} On a pu croire, à tort, que Bachelier prétendait prédire les cours futurs. En réalité, son objectif était d’étudier la distribution \textit{probabiliste} des cours à un instant donné, conditionnellement à l’état présent.
-
-    \item \textbf{Absence de terminologie moderne.} Bachelier ne parle ni de martingales, ni de mouvement brownien, ni de mesure risque-neutre, car ces notions ne seront formalisées que bien plus tard (Doob, Itô, Samuelson).
-
-    \item \textbf{Méconnaissance dans la communauté financière.} Le travail de Bachelier fut longtemps ignoré, redécouvert seulement après que Black, Scholes et Merton eurent formalisé les bases modernes des mathématiques financières. Pourtant, nombre de ses idées (espérance nulle, diffusion, évaluation par arbitrage) anticipent les développements du XX\up{e} siècle.
-
-    \item \textbf{Critique injuste de son réalisme.} S’il est vrai que les prix ne deviennent pas négatifs, le modèle de Bachelier n’avait pas vocation à être une description complète des marchés, mais une première tentative rigoureuse de modélisation mathématique.
-\end{itemize}
-
-\textit{
-Aujourd’hui, le modèle de Bachelier reste utilisé dans certaines applications spécifiques : par exemple dans la modélisation des taux d’intérêt négatifs (où les prix peuvent être négatifs) ou dans l’évaluation des options sur futures. Il offre aussi un cadre pédagogique accessible pour introduire les concepts fondamentaux de la finance quantitative.
-}
-
-\section{Héritage et influence}
-
-\subsection{Pourquoi Bachelier fut ignoré}
-
-Malgré l’originalité et la profondeur de sa thèse \textit{Théorie de la spéculation} (1900), Louis Bachelier ne fut pas immédiatement reconnu par la communauté scientifique. Plusieurs raisons expliquent ce désintérêt :
-
-\begin{itemize}
-    \item \textbf{L’inadéquation au contexte académique de l’époque.} Les mathématiques appliquées à la finance étaient perçues comme triviales ou trop empiriques. Le sujet, jugé trop spéculatif, ne bénéficiait pas du prestige accordé à la physique ou à la géométrie.
-    
-    \item \textbf{L’absence de cadre probabiliste formel.} La théorie des probabilités en 1900 n’était pas encore rigoureusement axiomatisée (ce ne sera fait qu’en 1933 par Kolmogorov). Bachelier manipule des densités et des espérances sans outils modernes tels que les martingales ou les intégrales stochastiques.
-
-    \item \textbf{Une carrière académique modeste.} Bachelier n’obtint jamais de chaire au Collège de France ni à la Sorbonne. Malgré le soutien prudent de Poincaré, son dossier ne bénéficia pas d’un fort appui institutionnel. Ses publications ultérieures restèrent relativement confidentielles.
-
-    \item \textbf{Un monde financier encore peu mathématisé.} Les professionnels de la finance du début du XX\textsuperscript{e} siècle n’étaient pas en demande d’outils formels. La bourse était vue comme un lieu d’intuition et de stratégie, non d’analyse quantitative.
-\end{itemize}
-
-\subsection{Réhabilitation au XX\textsuperscript{e} siècle}
-
-Ce n’est qu’à partir des années 1950 que les travaux de Bachelier furent redécouverts, notamment grâce à Paul Samuelson, prix Nobel d’économie, qui reconnut dans la diffusion brownienne une modélisation pertinente des prix financiers.
-
-\begin{itemize}
-    \item En 1955, Samuelson relie explicitement les travaux de Bachelier à ceux de Kolmogorov et de Wiener, et salue leur caractère pionnier dans la modélisation stochastique des prix.
-    
-    \item En 1965, Fama introduit la notion de \textit{marche aléatoire} pour les cours boursiers, une idée implicitement présente chez Bachelier dès 1900.
-
-    \item L’essor des modèles stochastiques en finance (Black-Scholes, Merton, etc.) dans les années 1970 redonne une légitimité scientifique à la démarche de Bachelier. Il est alors vu comme le premier à avoir appliqué le calcul différentiel aux probabilités financières.
-\end{itemize}
-
-\subsection{Impact sur la finance quantitative moderne}
-
-Aujourd’hui, Bachelier est considéré comme l’un des fondateurs de la finance quantitative. Plusieurs de ses intuitions se retrouvent au cœur de la théorie moderne des marchés :
-
-\begin{itemize}
-    \item \textbf{L’usage des processus stochastiques.} L’idée que les cours suivent une loi de probabilité continue, solution d’une équation de diffusion, est devenue une norme dans la modélisation.
-
-    \item \textbf{La valorisation par espérance neutre.} Le principe selon lequel la valeur d’un actif dérivé est l’espérance mathématique de son gain futur (éventuellement actualisée) est central dans les modèles d’arbitrage.
-
-    \item \textbf{La dynamique probabiliste des prix.} Le recours aux densités, aux moments, et aux lois continues (normale, log-normale, etc.) est au cœur de la gestion des risques, des prix, et des portefeuilles.
-
-    \item \textbf{Des applications pratiques persistantes.} Le modèle de Bachelier est encore utilisé dans certains marchés (taux d’intérêt proches de zéro, options sur futures, modèles de prix négatifs).
-
-    \item \textbf{Une inspiration historique.} Sa démarche pionnière reste un exemple d'audace scientifique : appliquer les outils des sciences exactes à un domaine incertain, humain et spéculatif.
-\end{itemize}
-
-\textit{
-En 2000, à l'occasion du centenaire de sa thèse, plusieurs colloques et publications ont salué la modernité de Bachelier. Sa vision probabiliste du monde économique préfigure aujourd’hui de nombreuses disciplines — de l’économétrie à l’apprentissage automatique — qui cherchent à modéliser les incertitudes et anticipations humaines.
-}
-
-\section{Conclusion}
-
-\subsection{Synthèse mathématique}
-
-La \textit{Théorie de la spéculation} de Louis Bachelier constitue la première tentative rigoureuse de modélisation probabiliste des fluctuations boursières. Son approche repose sur plusieurs piliers mathématiques :
-
-\begin{itemize}
-    \item La modélisation du cours comme une variable aléatoire suivant une loi de probabilité continue et symétrique autour d’un \textit{cours vrai}.
-    
-    \item L’introduction d’un processus stochastique (mouvement brownien additif) pour décrire l’évolution temporelle des cours :
-    \[
-    S_t = S_0 + \sigma B_t
-    \]
-
-    \item L’établissement d’une équation de diffusion (équation de Fourier) régissant la densité de probabilité :
-    \[
-    \frac{\partial p}{\partial t} = \frac{1}{2} \frac{\partial^2 p}{\partial x^2}
-    \]
-    et la solution gaussienne qui en découle :
-    \[
-    p(x,t) = \frac{1}{\sqrt{4\pi t}} \exp\left(-\frac{x^2}{4t}\right)
-    \]
-
-    \item L’évaluation des options (primes) par l’espérance mathématique, posant ainsi les bases de la valorisation moderne par arbitrage.
-\end{itemize}
-
-Cette construction fait de Bachelier un précurseur du calcul stochastique appliqué à l'économie.
-
-\subsection{Apports théoriques et historiques}
-
-Au-delà des résultats techniques, Bachelier initie un changement de paradigme : celui d’une finance envisagée non plus comme un art empirique, mais comme un champ d’application des mathématiques.
-
-Ses apports théoriques incluent :
-\begin{itemize}
-    \item L’intuition que les marchés expriment des croyances collectives modélisables par des lois statistiques.
-    \item La notion d’espérance nulle comme condition d’équité sur un marché idéal.
-    \item Le développement d’outils précurseurs des martingales, du pricing neutre au risque, et de la théorie des options.
-\end{itemize}
-
-Historiquement, malgré son oubli relatif durant la première moitié du XX\textsuperscript{e} siècle, l’œuvre de Bachelier a connu une réhabilitation à travers les travaux de Samuelson, Fama, Black, Scholes et Merton. Elle est désormais reconnue comme fondatrice dans l’émergence de la finance quantitative.
-
-\subsection{Perspectives actuelles}
-
-Aujourd’hui, les idées de Bachelier se prolongent dans de multiples directions :
-
-\begin{itemize}
-    \item \textbf{Les modèles stochastiques avancés} : modèles à volatilité stochastique (Heston), sauts de Lévy, processus de diffusion avec mémoire, etc.
-
-    \item \textbf{L’analyse de risque et la régulation} : la modélisation des distributions de pertes extrêmes, des queues de distribution, et des corrélations entre actifs.
-
-    \item \textbf{Les marchés modernes} : les données haute fréquence, la microstructure des marchés, et les algorithmes de trading automatisés prolongent la réflexion sur le rôle des anticipations dans un cadre mathématisé.
-
-    \item \textbf{Les approches bayésiennes et probabilistes} : elles reviennent au cœur des stratégies d’investissement adaptatives et de l’apprentissage automatique appliqué à la finance.
-
-    \item \textbf{L’interdisciplinarité} : les idées de Bachelier résonnent avec des travaux contemporains en physique (économie statistique), biologie (modèles d’évolution stochastique) et informatique (théorie des probabilités computationnelles).
-\end{itemize}
-
-\begin{center}
-\emph{En proposant dès 1900 de traiter les cours de la Bourse comme des phénomènes diffusifs soumis au hasard, Louis Bachelier a non seulement fondé la finance mathématique, mais aussi anticipé les outils conceptuels qui deviendront centraux un siècle plus tard.}
-\end{center}
-
-\appendix
-\section*{Annexes}
-\addcontentsline{toc}{section}{Annexes}
-
-\subsection*{A. Reproduction de figures de la thèse}
-
-\begin{center}
-    \includegraphics[width=0.6\textwidth]{fig4.png}
-    Courbe de probabilité extraite de la thèse de Bachelier (p. 36), représentant la densité gaussienne des cours futurs à l’instant $t$.
-\end{center}
-
-\vspace{0.5cm}
-
-\begin{center}
-    \includegraphics[width=0.65\textwidth]{fig4.png}
-    Illustration de la valeur moyenne d’une prime simple selon l’écart du cours (p. 53).
-\end{center}
-
-\textit{Remarque} : Ces figures peuvent être recréées en Python/Matplotlib ou TikZ pour une meilleure qualité typographique.
-
-\subsection*{B. Détails de formules mathématiques}
-
-\textbf{1. Espérance positive d’une prime simple} :
-\[
-\mathbb{E}[(X - a)^+] = \int_a^{\infty} (x - a)\, p(x,t)\, dx
-= \frac{\sigma\sqrt{t}}{\sqrt{2\pi}} \exp\left(-\frac{a^2}{2\sigma^2 t}\right) - a\left(1 - \Phi\left(\frac{a}{\sigma \sqrt{t}}\right)\right)
-\]
-
-\textbf{2. Probabilité de succès d’une prime} :
-\[
-\mathbb{P}(X > a) = \int_a^{\infty} p(x,t)\, dx = 1 - \Phi\left(\frac{a}{\sqrt{2t}}\right)
-\]
-
-\textbf{3. Solution fondamentale de l’équation de la chaleur} :
-\[
-p(x,t) = \frac{1}{\sqrt{4\pi t}} \exp\left(-\frac{x^2}{4t}\right)
-\]
-
-\textbf{4. Écart-type en fonction du temps} :
-\[
-\text{Var}(X_t) = 2t, \qquad \sigma(t) = \sqrt{2t}
-\]
-
-\subsection*{C. Références bibliographiques}
-
-\begin{itemize}
-    \item Bachelier, L. (1900). \textit{Théorie de la spéculation}. Annales scientifiques de l’École Normale Supérieure, 3\textsuperscript{e} série, 17, 21–86.
-
-    \item Samuelson, P. A. (1955). \textit{Brownian Motion in the Stock Market}. Cowles Commission Discussion Paper.
-
-    \item Black, F., \& Scholes, M. (1973). \textit{The Pricing of Options and Corporate Liabilities}. Journal of Political Economy, 81(3), 637–654.
-
-    \item Fama, E. (1965). \textit{The Behavior of Stock Market Prices}. Journal of Business, 38(1), 34–105.
-
-    \item Jarrow, R., \& Protter, P. (2004). \textit{A short history of stochastic integration and mathematical finance}. In: \textit{The Legacy of the Notion of Probability}, ed. by J.-P. Aubin.
-\end{itemize}
-
-\subsection*{D. Glossaire des termes techniques}
-
-\begin{description}
-    \item[Espérance mathématique :] Valeur moyenne d’une variable aléatoire, pondérée par sa probabilité.
-    \item[Prime :] Prix payé pour acquérir une option ; aussi appelée « valeur de l’option ».
-    \item[Cours vrai :] Valeur théorique du titre, centrée dans la loi de probabilité.
-    \item[Processus de diffusion :] Modèle aléatoire continu dont l’évolution dépend d’une équation aux dérivées partielles.
-    \item[Écart-type :] Racine carrée de la variance ; mesure de la dispersion autour de la moyenne.
-    \item[Martingale :] Processus stochastique sans tendance, pour lequel l’espérance future est égale à la valeur actuelle.
-    \item[Mouvement brownien :] Processus gaussien à accroissements indépendants et stationnaires, utilisé comme base des modèles de prix.
-    \item[Option :] Contrat financier donnant le droit (mais non l’obligation) d’acheter ou de vendre un actif à un prix donné.
-    \item[Diffusion additive vs. multiplicative :] Une diffusion additive implique une loi normale des prix ($S_t$), alors qu’une diffusion multiplicative implique une loi log-normale.
-\end{description}
-
+%TODO
 \end{document}
