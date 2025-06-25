@@ -658,5 +658,113 @@ Le modèle moderne de Black-Scholes lui suppose un mouvement brownien \textit{g�
 
 
 \section{Vision moderne du modèle de Bachelier}
-%TODO
+
+\subsection{Comparaison avec le modèle de Black-Scholes}
+
+Comme nous venons de l'étudier, le modèle de Bachelier repose sur l’hypothèse que le cours $S_t$ évolue selon un processus gaussien additif :
+\[
+S_t = S_0 + \sigma B_t
+\]
+où $B_t$ est un mouvement brownien standard, et $\sigma$ un paramètre de volatilité. Ainsi, les variations absolues de prix $S_t - S_0$ suivent une loi normale $\mathcal{N}(0, \sigma^2 t)$.
+
+À l’inverse, le modèle de Black-Scholes (1973) suppose que ce sont les \textit{rendements relatifs} qui suivent un mouvement brownien. Le prix $S_t$ évolue selon une dynamique multiplicative :
+\[
+dS_t = \mu S_t\, dt + \sigma S_t\, dW_t
+\]
+ou bien, en solution intégrée :
+\[
+S_t = S_0 \exp\left( \left(\mu - \frac{\sigma^2}{2} \right)t + \sigma W_t \right)
+\]
+où $W_t$ est un mouvement brownien, $\mu$ le taux de croissance moyen, et $\sigma$ la volatilité relative. Ainsi, $\log(S_t)$ suit une loi normale.
+
+\begin{table}[h]
+    \centering
+    \resizebox{\textwidth}{!}{%
+    \begin{tabular}{|c|p{6cm}|p{6cm}|}
+    \hline
+    \textbf{Aspect} & \textbf{Modèle de Bachelier} & \textbf{Modèle de Black-Scholes} \\
+    \hline
+    Évolution du prix & Additive & Multiplicative\\
+    \hline
+    Comportement des prix & Les prix peuvent devenir négatifs & $S_t > 0$ presque sûrement (les prix restent strictement positifs) \\
+    \hline
+    Comportement en temps court ou faible volatilité & Donne une bonne approximation & Converge aussi vers Bachelier quand $\sigma \to 0$ ou $t \to 0$ \\
+    \hline
+    Interprétation économique & Moins réaliste pour des actions ou actifs physiques & Plus réaliste pour les actifs financiers (actions, indices, etc.) \\
+    \hline
+    \end{tabular}
+    }
+    \caption{Comparaison entre les modèles de Bachelier et de Black-Scholes}
+\end{table}
+
+\subsection{Limites du modèle de Bachelier}
+
+Le modèle de Bachelier présente plusieurs limites notables :
+
+\begin{enumerate}
+    \item \textbf{Possibilité de cours négatifs.} L’additivité du processus implique que la distribution des prix $S_t$ est normale, donc non nulle sur $\mathbb{R}$. Ceci est irréaliste pour des actions ou des options standards, dont le prix ne peut devenir négatif.
+
+    \item \textbf{Absence de martingalisation sous la mesure risque-neutre.} L’absence d’un taux d’intérêt constant ou d’une probabilité risque-neutre explicite limite les méthodes modernes de couverture.
+
+    \item \textbf{Pas de volatilité implicite.} Le modèle ne relie pas naturellement la volatilité observée dans le marché des options à une structure de prix sous-jacente comme dans Black-Scholes.
+\end{enumerate}
+
+Malgré ses limites, le modèle de Bachelier a souvent été injustement sous-estimé. On a pu croire, à tort, que Bachelier prétendait prédire les cours futurs. En réalité, son objectif était d’étudier la distribution \textit{probabiliste} des cours à un instant donné, conditionnellement à l’état présent. Le travail de Bachelier fut longtemps ignoré, redécouvert seulement après que Black, Scholes et Merton eurent formalisé les bases modernes des mathématiques financières. Pourtant, nombre de ses idées (espérance nulle, diffusion, évaluation par arbitrage) anticipent les développements du XX\up{e} siècle.
+
+\section{Conclusion}
+La \textit{Théorie de la spéculation} de Louis Bachelier constitue la première tentative rigoureuse de modélisation probabiliste des fluctuations boursières. Au-delà des résultats techniques, Bachelier initie un changement de paradigme : celui d’une finance envisagée non plus comme un art empirique, mais comme un champ d’application des mathématiques. Historiquement, malgré son oubli durant la première moitié du XX\textsuperscript{e} siècle, l’œuvre de Bachelier a connu une réhabilitation à travers les travaux de Samuelson, Fama, Black, Scholes et Merton. Elle est désormais reconnue comme fondatrice dans l’émergence de la finance quantitative.
+
+En proposant dès 1900 de traiter les cours de la Bourse comme des phénomènes diffusifs soumis au hasard, Louis Bachelier a non seulement fondé la finance mathématique, mais aussi anticipé les outils conceptuels qui deviendront centraux un siècle plus tard.
+
+\appendix
+\section{Annexes}
+\addcontentsline{toc}{section}{Annexes}
+
+\subsection{Détails de formules mathématiques}
+
+\textbf{1. Espérance positive d’une prime simple} :
+\[
+\mathbb{E}[(X - a)^+] = \int_a^{\infty} (x - a)\, p(x,t)\, dx
+= \frac{\sigma\sqrt{t}}{\sqrt{2\pi}} \exp\left(-\frac{a^2}{2\sigma^2 t}\right) - a\left(1 - \Phi\left(\frac{a}{\sigma \sqrt{t}}\right)\right)
+\]
+
+\textbf{2. Probabilité de succès d’une prime} :
+\[
+\mathbb{P}(X > a) = \int_a^{\infty} p(x,t)\, dx = 1 - \Phi\left(\frac{a}{\sqrt{2t}}\right)
+\]
+
+\textbf{3. Solution fondamentale de l’équation de la chaleur} :
+\[
+p(x,t) = \frac{1}{\sqrt{4\pi t}} \exp\left(-\frac{x^2}{4t}\right)
+\]
+
+\textbf{4. Écart-type en fonction du temps} :
+\[
+\text{Var}(X_t) = 2t, \qquad \sigma(t) = \sqrt{2t}
+\]
+
+\subsection{Références bibliographiques}
+
+\begin{itemize}
+    \item Bachelier, L. (1900). \textit{Théorie de la spéculation}. Annales scientifiques de l’École Normale Supérieure, 3\textsuperscript{e} série, 17, 21–86.
+
+    \item Samuelson, P. A. (1955). \textit{Brownian Motion in the Stock Market}. Cowles Commission Discussion Paper.
+
+    \item Black, F., \& Scholes, M. (1973). \textit{The Pricing of Options and Corporate Liabilities}. Journal of Political Economy, 81(3), 637–654.
+\end{itemize}
+
+\subsection{Glossaire des termes techniques}
+
+\begin{description}
+    \item[Espérance mathématique :] Valeur moyenne d’une variable aléatoire, pondérée par sa probabilité.
+    \item[Prime :] Prix payé pour acquérir une option ; aussi appelée « valeur de l’option ».
+    \item[Cours vrai :] Valeur théorique du titre, centrée dans la loi de probabilité.
+    \item[Processus de diffusion :] Modèle aléatoire continu dont l’évolution dépend d’une équation aux dérivées partielles.
+    \item[Écart-type :] Racine carrée de la variance ; mesure de la dispersion autour de la moyenne.
+    \item[Martingale :] Processus stochastique sans tendance, pour lequel l’espérance future est égale à la valeur actuelle.
+    \item[Mouvement brownien :] Processus gaussien à accroissements indépendants et stationnaires, utilisé comme base des modèles de prix.
+    \item[Option :] Contrat financier donnant le droit (mais non l’obligation) d’acheter ou de vendre un actif à un prix donné.
+    \item[Diffusion additive vs. multiplicative :] Une diffusion additive implique une loi normale des prix ($S_t$), alors qu’une diffusion multiplicative implique une loi log-normale.
+\end{description}
+
 \end{document}
