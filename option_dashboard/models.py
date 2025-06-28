@@ -52,7 +52,6 @@ def price_bachelier(S, K, T, r, sigma, option_type="call"):
         return discount * ((K - S) * norm.cdf(-d) + sigma_hat * np.sqrt(T) * norm.pdf(d))
     
 def delta_bs(S, K, T, r, sigma, option_type="call"):
-    from scipy.stats import norm
     d1 = (np.log(S/K) + (r + 0.5 * sigma**2) * T) / (sigma * np.sqrt(T))
     if option_type == "call":
         return norm.cdf(d1)
@@ -65,8 +64,6 @@ def delta_bs(S, K, T, r, sigma, option_type="call"):
 # bien sûr on n'oublie pas les greeks (et oui pour voir les risques que je prends)
 # je pense écrire un cours dessus pour que la théorie soit bien claire
 def greeks_bs(S, K, T, r, sigma, option_type="call"):
-    from scipy.stats import norm
-
     d1 = (np.log(S / K) + (r + 0.5 * sigma**2) * T) / (sigma * np.sqrt(T))
     d2 = d1 - sigma * np.sqrt(T)
 
