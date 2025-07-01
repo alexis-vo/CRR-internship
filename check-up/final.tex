@@ -1,0 +1,90 @@
+\documentclass{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath, amsfonts}
+\usetheme{Madrid}
+\title{Bilan de Stage : Modélisation et Pricing d'Options}
+\author{Alexis VO}
+\date{Juin 2025}
+
+\begin{document}
+
+\frame{\titlepage}
+
+\begin{frame}{Objectifs du stage}
+\begin{itemize}
+    \item Étudier différents modèles de pricing d'options : CRR, Bachelier, Black-Scholes
+    \item Implémenter un outil interactif en Python (Streamlit)
+    \item Étudier les greeks et stratégies de couverture (hedging)
+    \item Vulgariser les concepts dans des articles destinés à des étudiants sans pré-requis en finance
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Le modèle de Cox-Ross-Rubinstein (CRR)}
+\begin{itemize}
+    \item Modèle binomial discret pour valoriser des options
+    \item Construction d'un arbre binaire avec facteurs $u$ et $d$
+    \item Valeur de l’option obtenue par récurrence backward
+    \item Convergence vers le modèle de Black-Scholes
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Implémentation technique (Python)}
+\begin{itemize}
+    \item Utilisation de \texttt{NumPy}, \texttt{matplotlib}, \texttt{Streamlit}
+    \item Implémentation des modèles CRR, Black-Scholes, Bachelier
+    \item Calcul des prix, greeks et stratégies de couverture
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Dashboard interactif}
+\begin{itemize}
+    \item Interface développée avec \texttt{Streamlit}
+    \item Saisie des paramètres : $S$, $K$, $r$, $\sigma$, $T$
+    \item Visualisation des résultats : prix, greeks, PnL
+    \item Comparaison entre les modèles
+    \item \textbf{Simulation en direct}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Étude des Greeks et du Hedging}
+\begin{itemize}
+    \item Calculs analytiques ou numériques des greeks (delta, gamma, etc.)
+    \item Implémentation du hedging dynamique (ex: couverture delta)
+    \item Analyse de la performance selon les modèles
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Articles rédigés}
+\begin{itemize}
+    \item Article sur le modèle de CRR (fondements et application)
+    \item Article sur le modèle de Bachelier
+    \item Projet d’article sur le modèle de Black-Scholes
+    \item Prix Fermat Junior
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Prix Fermat Junior}
+\begin{itemize}
+    \item Concours récompensant les meilleurs articles mathématiques d’étudiants (niveau Licence)
+    \item Sujet envisagé : ?? sinon étude de la convergence CRR vers B-S
+    \item Mise en valeur de ce stage
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Pistes pour la suite}
+\begin{itemize}
+    \item Article sur le modèle de Black-Scholes
+    \item Implémentation de modèles plus complexes (Heston, SABR)
+    \item Ajout de calibration, options exotiques, ou simulateur de PnL
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Conclusion}
+\begin{itemize}
+    \item Partie mathématique intéressante, implémentation enrichissante
+    \item Outil interactif utile pour vulgariser les concepts
+    \item Perspectives d'amélioration et de recherche
+\end{itemize}
+\end{frame}
+
+\end{document}
