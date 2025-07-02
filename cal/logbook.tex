@@ -26,7 +26,7 @@
 \renewcommand\maketitlehooka{\null\mbox{}\vfill}
 \renewcommand\maketitlehookd{\vfill\null}
 
-\title{\Huge{\textbf{Modèle de Cox-Ross-Rubinstein}}\\ \medskip
+\title{\Huge{\textbf{Stage en finance\\ Modèle de Cox-Ross-Rubinstein}}\\ \medskip
       \Huge{\textit{Journal de bord}}\vspace*{0.7cm}}
 \author{\LARGE{Alexis VO}\vspace{1cm}\\ \medskip
       Université Paris-Saclay\\École polytechnique}
@@ -769,15 +769,67 @@ La journée a permis de formaliser les activités de trading et d’illustrer le
 % JOUR 17
 %==========================================================
 
-\section{Jour N, ...}
+\section{Jour 17 --- Création du tableau de bord d’options}
+
 \subsection{Objectifs de la journée}
 \begin{itemize}
-    \item ...
+    \item Consolider les connaissances sur les modèles CRR, Black--Scholes et Bachelier.
+    \item Mettre en place une interface Python interactive (Streamlit) servant de tableau de bord.
+    \item Implémenter les fonctions de pricing et structurer le projet de manière modulaire.
 \end{itemize}
-\subsection{...}
+
+\subsection{Travail réalisé}
+\begin{itemize}
+    \item Élaboration d’un plan d’attaque en cinq étapes : définition des composants, implémentation des fonctions, création de l’interface, visualisations, recommandations.
+    \item Création de \texttt{models.py} contenant les fonctions \texttt{price\_bs}, \texttt{price\_crr} et \texttt{price\_bachelier}.
+    \item Développement de \texttt{app.py} avec Streamlit.
+\end{itemize}
+
+\subsection*{Barre latérale des paramètres (interface Streamlit)}
+
+La barre latérale permet à l’utilisateur de saisir les paramètres d’entrée nécessaires au calcul du prix des options selon les trois modèles implémentés. Voici la liste des paramètres disponibles :
+
+\begin{center}
+\begin{tabular}{|l|l|l|}
+    \hline
+    \textbf{Paramètre} & \textbf{Description} & \textbf{Type / Intervalle} \\
+    \hline
+    $S$ & Prix spot de l’actif sous-jacent & Nombre réel (ex. : 100) \\
+    $K$ & Prix d’exercice (strike) & Nombre réel (ex. : 100) \\
+    $T$ & Maturité (en années) & Nombre réel positif (ex. : 1.0) \\
+    $r$ & Taux d’intérêt sans risque & Nombre réel (ex. : 0.05) \\
+    $\sigma$ & Volatilité (relative, pour BS et CRR) & Nombre réel (ex. : 0.2) \\
+    $N$ & Nombre d’étapes pour CRR & Entier de 10 à 500 \\
+    Type d’option & Call ou Put & Menu déroulant \\
+    \hline
+\end{tabular}
+\end{center}
+
+Ces paramètres sont ensuite utilisés pour afficher dynamiquement le prix de l’option selon les trois modèles dans l’interface principale du tableau de bord.
+
 \subsection{À suivre...}
+\begin{itemize}
+    \item Ajouter des graphiques interactifs avec \texttt{plotly} : payoff, convergence CRR $\rightarrow$ BS, surfaces de prix.
+    \item Créer \texttt{hedging.py} pour la delta-couverture et autres stratégies.
+    \item Intégrer une logique de recommandations achat/vente fondée sur les greeks.
+    \item Refactoriser avec des classes (\texttt{Option}, \texttt{Model}, \texttt{Portfolio}) et rédiger la documentation.
+\end{itemize}
+
 \subsection{Conclusion}
+La journée a permis de poser un socle technique solide : les fonctions de pricing sont opérationnelles et l’interface Streamlit affiche déjà des résultats exploitables. Les fondations sont prêtes pour enrichir le tableau de bord avec des visualisations avancées, la couverture et la partie recommandations.
+
 \newpage
 
+\section{Conclusion du stage}
+
+Ce stage d'un mois au sein du laboratoire du CMAP à l’École polytechnique, constitue en réalité une étape intermédiaire dans un travail amorcé bien en amont et destiné à se prolonger au-delà de cette période. La phase préparatoire a permis d’acquérir des bases solides en valorisation d’options, surtout du vocabulaire financier. Ceci m'a permis de démarrer immédiatement et efficacement dès les premiers jours.
+
+Les travaux menés ont couvert un large spectre allant de l’implémentation algorithmique du modèle binomial de Cox-Ross-Rubinstein à la construction d’interfaces interactives (Streamlit), en passant par la formalisation mathématique du pricing, la réplication dynamique, et une relecture approfondie de la thèse de Louis Bachelier. Ce parcours a été enrichi par une réflexion constante sur l’articulation entre théorie, implémentation numérique, visualisation et applications concrètes.
+
+Au-delà de l’aspect technique, ce stage a été l’occasion d’adopter une démarche de recherche progressive et autonome. Il a également servi de tremplin pour des projets plus personnels comme la participation au Prix Fermat Junior, ou l’approfondissement des liens entre les modèles discrets et continus en finance quantitative.
+
+Les jours passés au CMAP m'ont été très enrichissant ; notamment grâce à un environnement stimulant et à des échanges constructifs avec les autres stagiaires aussi bien du CMAP que du CREST. Bien qu'officielement terminé, ce stage ne marque pas une fin, mais plutôt un point d’inflexion : les développements se poursuivront, tant sur le plan technique (graphiques, extensions du code, implémentation de stratégies) que sur le plan rédactionnel (article scientifique, vulgarisation, documentation complète).
+
+Je pense notamment au Prix Fermat Junior, qui représente un objectif estival motivant pour moi.
 %==========================================================
 \end{document}
